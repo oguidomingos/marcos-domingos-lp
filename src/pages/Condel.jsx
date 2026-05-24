@@ -1,177 +1,310 @@
 import { Link } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+
+const brands = [
+  { name: 'Castelo Forte', desc: 'Standard e resistentes' },
+  { name: 'Casa Forte', desc: 'Linha premium' },
+  { name: 'Hidromar', desc: 'Eletro-hidráulicos' },
+  { name: 'Stoptone', desc: 'Interruptores e tomadas' },
+  { name: 'Sicame', desc: 'Conectores e acessórios' },
+  { name: 'Ficap', desc: 'Fios e cabos' },
+  { name: 'Pratec', desc: 'Eletrodutos e acessórios' },
+  { name: 'Pial Legrand', desc: 'Material de alta linha' },
+]
+
+const steps = [
+  { icon: '1', title: 'Peça', desc: 'Orçamento por WhatsApp ou visita.' },
+  { icon: '2', title: 'Cotação', desc: 'Melhor preço do mercado em minutos.' },
+  { icon: '3', title: 'Separação', desc: 'Estoque próprio em Taguatinga.' },
+  { icon: '4', title: 'Entrega', desc: 'Rápida em Brasília e entorno.' },
+]
 
 export default function Condel() {
   return (
     <div>
+      {/* Header */}
       <header className="header">
         <div className="container">
-          <div className="logo">
-            <span className="logo-icon" style={{ background: '#2563eb' }}>C</span>
-            Condel
-          </div>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', textDecoration: 'none' }}>
+            <div style={{
+              width: 36, height: 36, borderRadius: 6,
+              background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '0.875rem', fontWeight: 700, color: '#fff',
+              fontFamily: "'JetBrains Mono', monospace",
+            }}>C</div>
+            <span style={{
+              fontSize: '1.125rem', fontWeight: 600,
+              color: '#f7f8f8', letterSpacing: '0em',
+            }}>
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}>CONDEL</span>
+            </span>
+          </Link>
           <nav>
             <ul className="nav-links">
-              <li><Link to="/">← Voltar</Link></li>
-              <li><a href="#produtos">Produtos</a></li>
-              <li><a href="#estrategia">Estratégia</a></li>
-              <li><a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20comprar%20materiais%20el%C3%A9tricos%20da%20Condel" className="btn btn-primary">Cotar</a></li>
+              <li><a href="#marcas">Marcas</a></li>
+              <li><a href="#processo">Processo</a></li>
+              <li><a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20cotar%20material%20el%C3%A9trico%20com%20a%20Condel" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.8125rem', background: 'linear-gradient(135deg, #3b82f6, #2563eb)' }}>
+                Cotar Preço
+              </a></li>
             </ul>
           </nav>
         </div>
       </header>
 
-      <section className="page-header">
-        <div className="container">
-          <Link to="/" className="back-link">← Todos os produtos</Link>
-          <h1>⚡ Condel Condutores Elétricos</h1>
-          <div className="meta">
-            <span>📍 Brasília-DF</span>
-            <span>🏬 150+ Lojas Atendidas</span>
-            <span>🚚 Entrega Rápida</span>
+      {/* Hero */}
+      <div className="product-hero" style={{
+        background: 'linear-gradient(180deg, rgba(59,130,246,0.03) 0%, transparent 100%)',
+        position: 'relative', overflow: 'hidden',
+      }}>
+        {/* Grid pattern */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: `
+            linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+          pointerEvents: 'none',
+          opacity: 0.5,
+        }} />
+        <div className="product-hero-glow" style={{
+          background: 'radial-gradient(ellipse, rgba(59,130,246,0.05) 0%, transparent 60%)',
+        }} />
+        <section className="container" style={{
+          position: 'relative', zIndex: 1,
+          paddingTop: '6rem', paddingBottom: '4rem',
+        }}>
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+            padding: '0.375rem 1rem', borderRadius: 6,
+            background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.2)',
+            color: '#60a5fa', fontSize: '0.8125rem', fontWeight: 500,
+            marginBottom: '1.5rem',
+            fontFamily: "'JetBrains Mono', monospace",
+          }}>
+            $ Estoque Próprio · Taguatinga-DF
           </div>
-        </div>
-      </section>
+          <h1 style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: 'clamp(2rem, 6vw, 4rem)',
+            fontWeight: 400,
+            lineHeight: 1.05,
+            color: '#f7f8f8',
+            marginBottom: '1rem',
+          }}>
+            <span style={{ color: '#3b82f6', fontWeight: 500 }}>Condel</span>_<br />
+            condutores_elétricos
+          </h1>
+          <p style={{
+            color: '#8a8f98', maxWidth: '560px', marginBottom: '2rem',
+            fontSize: '1rem', lineHeight: 1.7,
+            fontFamily: "'DM Sans', sans-serif",
+          }}>
+            Depósito próprio em Taguatinga com as principais marcas do mercado elétrico. 
+            Preço justo, entrega rápida e estoque que não deixa sua obra parada.
+          </p>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20cotar%20material%20el%C3%A9trico%20com%20a%20Condel" target="_blank" rel="noopener noreferrer" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              padding: '1rem 2.25rem', borderRadius: 6,
+              background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+              color: '#fff', fontSize: '0.9375rem', fontWeight: 500,
+              textDecoration: 'none',
+              fontFamily: "'JetBrains Mono', monospace",
+            }}>
+              Cotar_Preço()
+            </a>
+            <a href="#marcas" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              padding: '1rem 2.25rem', borderRadius: 6,
+              border: '2px solid #3b82f6',
+              color: '#60a5fa', fontSize: '0.9375rem', fontWeight: 500,
+              textDecoration: 'none',
+              fontFamily: "'JetBrains Mono', monospace",
+            }}>
+              Ver_Marcas()
+            </a>
+          </div>
+        </section>
+      </div>
 
-      <section className="content-section">
-        <div className="container">
-          <div className="split-layout">
-            <div>
-              <h2>Sobre a Condel</h2>
-              <p>
-                A Condel Condutores Elétricos é uma distribuidora de materiais 
-                elétricos com depósito próprio em Brasília. Já atende mais de 
-                150 lojas, incluindo redes como Castelo Forte e Casa Forte.
-              </p>
-              <p>
-                O diferencial está no preço competitivo e na entrega rápida 
-                para todo o Distrito Federal. Trabalha com as principais marcas 
-                do mercado, garantindo INMETRO em todos os produtos.
-              </p>
+      {/* Stats */}
+      <div style={{
+        borderTop: '1px solid rgba(59,130,246,0.12)',
+        borderBottom: '1px solid rgba(59,130,246,0.12)',
+        padding: '2rem 0',
+        background: 'rgba(59,130,246,0.02)',
+      }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
+          {[
+            { value: '150+', label: 'Lojas Atendidas' },
+            { value: '8+', label: 'Marcas Principais' },
+            { value: '24h', label: 'Cotação Rápida' },
+          ].map((item, i) => (
+            <div key={i} style={{ textAlign: 'center' }}>
+              <div style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                fontWeight: 500,
+                color: '#3b82f6', marginBottom: '0.25rem',
+              }}>
+                {item.value}
+              </div>
+              <div style={{ fontSize: '0.8125rem', color: '#8a8f98' }}>
+                {item.label}
+              </div>
             </div>
-            <div className="highlight">
-              <h3>🎯 Meta Financeira</h3>
-              <p>
-                <strong>Mês 1 (a partir de 25/05):</strong> R$ 25.000<br />
-                <strong>Mês 2:</strong> R$ 35.000<br />
-                <strong>Mês 3:</strong> R$ 45.000<br />
-                <strong>Mês 5:</strong> R$ 60.000/mês<br /><br />
-                <strong>Potencial anual:</strong> R$ 720.000+ em receita
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      <section className="content-section" id="produtos" style={{ background: 'var(--bg-panel)' }}>
+      {/* Brands */}
+      <section className="product-section" id="marcas">
         <div className="container">
-          <h2>Portfólio de Produtos</h2>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Categoria</th>
-                  <th>Produtos</th>
-                  <th>Marcas</th>
-                  <th>Público</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Fios e Cabos</td><td>1,5mm a 12mm, cabos PP, alumínio, bobinas</td><td>Castelo Forte, Casa Forte</td><td>Lojas de material, Construtoras</td></tr>
-                <tr><td>Aterramento</td><td>Hastes, cabos, conectores</td><td>Castelo Forte</td><td>Lojas de material elétrico</td></tr>
-                <tr><td>Sonorização</td><td>Cabos de áudio, conectores</td><td>Diversas</td><td>Lojas de som, Instaladores</td></tr>
-                <tr><td>Disjuntores</td><td>Disjuntores termomagnéticos, DR, DPS</td><td>Castelo Forte, Casa Forte</td><td>Lojas de material, Eletricistas</td></tr>
-                <tr><td>Tomadas e Interruptores</td><td>Linhas completa</td><td>Castelo Forte</td><td>Lojas de construção</td></tr>
-                <tr><td>Quadros Elétricos</td><td>QDC, QDF, painéis</td><td>Diversas</td><td>Construtoras, Indústrias</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <section className="content-section" id="estrategia">
-        <div className="container">
-          <h2>Plano de Expansão</h2>
-
-          <h3>📌 Prospecção Ativa</h3>
-          <ul className="checklist">
-            <li><span className="check-icon">✓</span> SalesQL: buscar "loja de material elétrico" + "material de construção" em Brasília-DF e entorno</li>
-            <li><span className="check-icon">✓</span> ZonaCerta: mapeamento georreferenciado de 100 km ao redor do depósito</li>
-            <li><span className="check-icon">✓</span> Pipeline "Condel - Revendedores" no PipeRun</li>
-            <li><span className="check-icon">✓</span> Template WhatsApp: "Catálogo Completo - Preço de Distribuidor"</li>
-            <li><span className="check-icon">✓</span> Meta: 150 leads/mês, 20% conversão (segmento nichado)</li>
-          </ul>
-
-          <h3>📱 Marketing Digital e SEO</h3>
-          <ul className="checklist">
-            <li><span className="check-icon">✓</span> Google Meu Negócio: "Distribuidora de Materiais Elétricos em Brasília"</li>
-            <li><span className="check-icon">✓</span> Blog técnico: guia de compras para lojistas, dicas de estoque</li>
-            <li><span className="check-icon">✓</span> Landing pages por categoria: cabos, disjuntores, quadros</li>
-            <li><span className="check-icon">✓</span> Palavras-chave: "materiais elétricos atacado Brasília", "distribuidora de condutores elétricos"</li>
-            <li><span className="check-icon">✓</span> Parceria com escolas técnicas e SENAI para conteúdo técnico</li>
-          </ul>
-
-          <h3>🎯 Cronograma de Receita</h3>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr><th>Mês</th><th>Ações Principais</th><th>Receita</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>1 (Maio)</td><td>Prospecção ativa, cadastro de 150+ leads, primeiras visitas</td><td>R$ 25.000</td></tr>
-                <tr><td>2</td><td>Fechar 15 novos clientes, SEO local rodando, blog ativo</td><td>R$ 35.000</td></tr>
-                <tr><td>3</td><td>Expandir para 30+ clientes, parcerias com construtoras</td><td>R$ 45.000</td></tr>
-                <tr><td>4</td><td>Conteúdo técnico ranqueando, leads orgânicos entrando</td><td>R$ 52.000</td></tr>
-                <tr><td>5</td><td>Operação consolidada, planos de expansão para GO/MG</td><td>R$ 60.000+</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h3>⚡ Ações Práticas (30 Dias)</h3>
-          <div className="table-wrap">
-            <table>
-              <thead><tr><th>Ação</th><th>Prazo</th></tr></thead>
-              <tbody>
-                <tr><td>Google Meu Negócio completo com fotos do depósito</td><td>5 dias</td></tr>
-                <tr><td>Landing page "Materiais Elétricos para Revenda" com preços</td><td>5 dias</td></tr>
-                <tr><td>Cadastro em 20+ diretórios de fornecedores de construção</td><td>10 dias</td></tr>
-                <tr><td>Release para veículos locais sobre a distribuidora em Brasília</td><td>7 dias</td></tr>
-                <tr><td>Publicar 4 artigos de blog (guias para revendedores)</td><td>20 dias</td></tr>
-                <tr><td>Visitar pessoalmente 30 lojas de material elétrico</td><td>30 dias</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div className="highlight">
-            <h3>💡 Diferencial Competitivo</h3>
-            <p>
-              A Condel tem um trunfo logístico: depósito próprio em Brasília 
-              com estoque disponível, permitindo entrega rápida no DF. 
-              Para lojistas, isso significa não precisar manter estoque grande — 
-              compram sob demanda e recebem no dia seguinte. A combinação 
-              de preço competitivo, marcas fortes (Castelo Forte, Casa Forte) 
-              e logística rápida é difícil de bater.
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <span className="section-label" style={{ color: '#60a5fa' }}>Marcas</span>
+            <h2 className="section-title" style={{ color: '#f7f8f8' }}>
+              Portfólio Técnico
+            </h2>
+            <p className="section-sub" style={{ margin: '0 auto' }}>
+              As marcas que o mercado confia. Todas com estoque em Taguatinga.
             </p>
           </div>
+          <div className="grid-4">
+            {brands.map((b, i) => (
+              <div key={i} className="feature-card" style={{
+                padding: '1.25rem',
+                borderTop: '2px solid rgba(59,130,246,0.3)',
+              }}>
+                <h4 style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: '0.9375rem',
+                  fontWeight: 500,
+                  color: '#f7f8f8',
+                  marginBottom: '0.375rem',
+                }}>
+                  {b.name}
+                </h4>
+                <p style={{ fontSize: '0.8125rem', color: '#62666d' }}>
+                  {b.desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="content-section" style={{ textAlign: 'center', borderBottom: 'none' }}>
+      {/* Diferenciais */}
+      <section className="product-section product-section-alt">
         <div className="container">
-          <h2 style={{ marginBottom: 16 }}>Quer revender materiais elétricos?</h2>
-          <p style={{ maxWidth: 500, margin: '0 auto 24px' }}>
-            Lojas de material de construção e elétrico — solicite seu 
-            catálogo completo com tabela de preços para revendedor.
+          <div className="grid-2">
+            <div>
+              <span className="section-label" style={{ color: '#60a5fa' }}>Diferencial</span>
+              <h2 className="section-title" style={{ color: '#f7f8f8' }}>
+                Por Que a Condel
+              </h2>
+              <p style={{ fontSize: '1rem', lineHeight: 1.7, color: '#8a8f98', marginBottom: '1.5rem' }}>
+                Mais de 150 lojas na base. O segredo não é milagre — é estoque próprio 
+                e preço justo. Enquanto outros estão comprando, a Condel já está entregando.
+              </p>
+              <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {[
+                  'Depósito abastecido com as marcas que vendem',
+                  'Preço competitivo — cotação em minutos',
+                  'Entrega rápida em Brasília e Entorno',
+                  'Atendimento personalizado para lojistas',
+                ].map((item, i) => (
+                  <li key={i} style={{ display: 'flex', gap: '0.625rem', alignItems: 'flex-start' }}>
+                    <span style={{ color: '#3b82f6', fontWeight: 700 }}>→</span>
+                    <span style={{ fontSize: '0.9375rem', color: '#b0b6c0' }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div id="processo" style={{
+              background: 'linear-gradient(135deg, rgba(59,130,246,0.06), transparent)',
+              borderRadius: 12,
+              border: '1px solid rgba(59,130,246,0.12)',
+              padding: '2.5rem',
+            }}>
+              <h4 style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '1rem', fontWeight: 500,
+                color: '#3b82f6', marginBottom: '1.5rem',
+              }}>
+                + Como Funciona
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {steps.map((s, i) => (
+                  <div key={i} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                    <div style={{
+                      width: 32, height: 32, borderRadius: 6,
+                      background: 'rgba(59,130,246,0.1)',
+                      border: '1px solid rgba(59,130,246,0.2)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: '0.8125rem', fontWeight: 500,
+                      color: '#60a5fa', flexShrink: 0,
+                    }}>
+                      {s.icon}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#f7f8f8', marginBottom: '0.125rem' }}>
+                        {s.title}
+                      </div>
+                      <div style={{ fontSize: '0.8125rem', color: '#62666d' }}>
+                        {s.desc}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20cotar%20material%20el%C3%A9trico%20com%20a%20Condel" target="_blank" rel="noopener noreferrer" style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
+                marginTop: '1.5rem',
+                padding: '0.875rem', borderRadius: 6,
+                background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                color: '#fff', fontSize: '0.875rem', fontWeight: 500,
+                textDecoration: 'none',
+                fontFamily: "'JetBrains Mono', monospace",
+              }}>
+                Solicitar_Cotação()
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA final */}
+      <section className="product-section" style={{ textAlign: 'center' }}>
+        <div className="container">
+          <h2 className="section-title" style={{ color: '#f7f8f8', marginBottom: '0.75rem' }}>
+            Vamos Conversar?
+          </h2>
+          <p className="section-sub" style={{ margin: '0 auto 2rem' }}>
+            Lojistas de material de construção e elétrico — cotação rápida, 
+            entrega programada, preço que fecha.
           </p>
-          <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20comprar%20materiais%20el%C3%A9tricos%20da%20Condel" className="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-            📱 Fale com Marcos no WhatsApp
+          <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20cotar%20material%20el%C3%A9trico%20com%20a%20Condel" target="_blank" rel="noopener noreferrer" style={{
+            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+            padding: '1rem 2.5rem', borderRadius: 6,
+            background: 'linear-gradient(135deg, #22c55e, #16a34a)',
+            color: '#fff', fontSize: '0.9375rem', fontWeight: 500,
+            textDecoration: 'none',
+            fontFamily: "'JetBrains Mono', monospace",
+          }}>
+            Iniciar_Chat()
           </a>
+          <div style={{ marginTop: '1rem' }}>
+            <Link to="/" className="back-link">← Voltar ao portfólio</Link>
+          </div>
         </div>
       </section>
 
       <footer className="footer">
         <div className="container">
-          <p>Condel Condutores Elétricos — Distribuidora · Brasília-DF · Castelo Forte · Casa Forte</p>
-          <p style={{ marginTop: 8, fontSize: 13 }}><Link to="/">← Voltar ao portfólio</Link></p>
+          <p>Condel Condutores Elétricos — Depósito em Taguatinga-DF · 150+ Lojas Atendidas</p>
         </div>
       </footer>
     </div>

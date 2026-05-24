@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 const products = [
-  { name: 'Mel Natural', sizes: '1kg · 500g · 470g · 25kg', tag: 'B2B e Indústria' },
-  { name: 'Mel Orgânico', sizes: 'Vidro · Plástico', tag: 'Lojas Naturais' },
-  { name: 'Linha Premium', sizes: '3 floradas selecionadas', tag: 'Mercado Nobre' },
-  { name: 'Própolis', sizes: 'Frasco 20-30ml', tag: 'Farmácias' },
-  { name: 'Pólen Apícola', sizes: 'Pote 100-200g', tag: 'Lojas Naturais' },
-  { name: 'Compostos', sizes: 'Mel + Própolis · Gengibre', tag: 'Supermercados' },
-  { name: 'Sachês', sizes: '10-12g individual', tag: 'Padarias · Hotéis' },
-  { name: 'Cera de Abelha', sizes: 'Bloco · Granulado', tag: 'Indústria' },
+  { name: 'Mel Natural', sizes: '1kg · 500g · 470g · 25kg', tag: 'B2B e Indústria', emoji: '🍯' },
+  { name: 'Mel Orgânico', sizes: 'Vidro · Plástico · Food Service', tag: 'Lojas Naturais', emoji: '🌿' },
+  { name: 'Linha Premium', sizes: '3 Floradas Selecionadas', tag: 'Mercado Nobre', emoji: '👑' },
+  { name: 'Própolis', sizes: 'Frasco 20ml · 30ml', tag: 'Farmácias', emoji: '💊' },
+  { name: 'Pólen Apícola', sizes: 'Pote 100g · 200g', tag: 'Lojas Naturais', emoji: '🌸' },
+  { name: 'Compostos', sizes: 'Mel + Própolis · Mel + Gengibre', tag: 'Supermercados', emoji: '🧪' },
+  { name: 'Sachês', sizes: '10g · 12g Individual', tag: 'Padarias · Hotéis', emoji: '📦' },
+  { name: 'Cera de Abelha', sizes: 'Bloco · Granulado', tag: 'Indústria', emoji: '🕯️' },
 ]
 
 const clients = [
@@ -17,33 +17,32 @@ const clients = [
   'Superbom', 'Atacadão', 'Caique', 'Armazém do Queijo'
 ]
 
-export default function Pimel() {
-  const [activeTab, setActiveTab] = useState(0)
+const highlights = [
+  { icon: '🏆', title: 'SISBI', desc: 'Certificação que libera venda nacional. Sem burocracia interestadual.' },
+  { icon: '📋', title: 'Rastreabilidade Total', desc: 'Cada lote tem origem, data e análise. Qualidade que o mercado exige.' },
+  { icon: '🚛', title: 'Escala Nacional', desc: 'Mel a granel, sachês, vidros. Qualquer formato para seu ponto de venda.' },
+]
 
+function A({ children, ...props }) {
+  return <div {...props} style={{ opacity: 0 }}>{children}</div>
+}
+
+export default function Pimel() {
   return (
     <div>
-      {/* ===== HEADER ===== */}
-      <header className="header" style={{
-        background: 'rgba(8,9,10,0.92)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-      }}>
+      {/* Header */}
+      <header className="header">
         <div className="container">
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-            <span style={{
-              width: 32, height: 32, borderRadius: 8,
-              background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 16, fontWeight: 700, color: '#fff',
-            }}>P</span>
-            <span className="logo" style={{ fontSize: 18 }}>PIMEL</span>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', textDecoration: 'none' }}>
+            <span className="logo-mark" style={{ background: 'linear-gradient(135deg, #f59e0b, #b45309)' }}>P</span>
+            <span className="logo" style={{ fontSize: '1.125rem' }}>PIMEL</span>
           </Link>
           <nav>
             <ul className="nav-links">
-              <li><a href="#sobre">Produtos</a></li>
+              <li><a href="#produtos">Produtos</a></li>
               <li><a href="#diferenciais">Diferenciais</a></li>
               <li><a href="#clientes">Clientes</a></li>
-              <li><a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20revender%20mel%20PIMEL%20-%20certifica%C3%A7%C3%A3o%20SISBI" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '6px 16px', fontSize: 13 }}>
+              <li><a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20revender%20mel%20PIMEL%20-%20certifica%C3%A7%C3%A3o%20SISBI" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.8125rem' }}>
                 Quero Revender
               </a></li>
             </ul>
@@ -51,334 +50,253 @@ export default function Pimel() {
         </div>
       </header>
 
-      {/* ===== HERO ===== */}
-      <section style={{
-        padding: '120px 0 80px',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
-        {/* Background glow */}
-        <div style={{
-          position: 'absolute', top: '-30%', left: '50%', transform: 'translateX(-50%)',
-          width: 800, height: 800,
-          background: 'radial-gradient(ellipse, rgba(245,158,11,0.08) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
-            <span style={{
-              display: 'inline-block', padding: '5px 14px', borderRadius: 9999,
-              background: 'rgba(245,158,11,0.12)', color: '#fbbf24',
-              fontSize: 12, fontWeight: 600, letterSpacing: '0.08em',
-              textTransform: 'uppercase', marginBottom: 20,
+      {/* Hero */}
+      <section className="product-page">
+        <div className="product-hero" style={{
+          background: 'linear-gradient(180deg, rgba(245,158,11,0.03) 0%, transparent 100%)',
+        }}>
+          <div className="product-hero-glow" style={{
+            background: 'radial-gradient(ellipse, rgba(245,158,11,0.08) 0%, transparent 65%)',
+          }} />
+          <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+            <div className="hero-badge" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.375rem 1rem', borderRadius: 100,
+              background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.2)',
+              color: '#fbbf24', fontSize: '0.8125rem', fontWeight: 500, marginBottom: '1.5rem',
             }}>
-              Certificação SISBI — Venda Nacional
-            </span>
+              🐝 Certificação SISBI — Venda Nacional
+            </div>
             <h1 style={{
-              fontSize: 'clamp(36px, 6vw, 64px)',
-              fontWeight: 510, letterSpacing: '-0.03em',
-              lineHeight: 1.0, color: '#f7f8f8',
-              marginBottom: 16,
+              fontFamily: "'Fraunces', serif",
+              fontSize: 'clamp(2.5rem, 7vw, 5rem)',
+              fontWeight: 500,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.0,
+              color: '#f7f8f8',
+              marginBottom: '1rem',
+              fontVariationSettings: "'SOFT' 60, 'WONK' 0.5",
             }}>
-              O Mel Que Roda<br />o Brasil
+              O Mel Que Roda<br /><span style={{ color: '#fbbf24' }}>O Brasil</span>
             </h1>
-            <p style={{
-              fontSize: 18, lineHeight: 1.6, color: '#8a8f98',
-              maxWidth: 520, margin: '0 auto 32px',
-            }}>
+            <p style={{ color: '#8a8f98' }}>
               Do Cerrado para todo o país. O PIMEL tem certificação SISBI — 
               o selo que libera venda nacional. Supermercados, atacados e indústrias 
-              de qualquer estado já compram. Sua rede pode ser a próxima.
+              de qualquer estado já compram.
             </p>
-            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20revender%20mel%20PIMEL%20-%20certifica%C3%A7%C3%A3o%20SISBI" target="_blank" rel="noopener noreferrer" style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '14px 32px', borderRadius: 8,
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20revender%20mel%20PIMEL%20-%20certifica%C3%A7%C3%A3o%20SISBI" target="_blank" rel="noopener noreferrer" className="btn btn-lg" style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '1rem 2.25rem', borderRadius: 10,
                 background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-                color: '#fff', fontSize: 16, fontWeight: 600,
-                textDecoration: 'none', transition: 'all 0.2s',
-              }}>
-                Quero Revender → 
-              </a>
-              <a href="#sobre" style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '14px 32px', borderRadius: 8,
-                background: 'rgba(255,255,255,0.04)', color: '#d0d6e0',
-                fontSize: 16, fontWeight: 500, textDecoration: 'none',
-                border: '1px solid rgba(255,255,255,0.08)',
-              }}>
-                Ver Produtos
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CLIENTES (Carrossel compacto) ===== */}
-      <section style={{ padding: '40px 0', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-        <div className="container">
-          <p style={{ fontSize: 12, color: '#62666d', textTransform: 'uppercase', letterSpacing: '0.08em', textAlign: 'center', marginBottom: 16, fontWeight: 600 }}>
-            Já Atende Redes como
-          </p>
-          <div style={{
-            display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center',
-          }}>
-            {clients.map(c => (
-              <span key={c} style={{
-                padding: '6px 14px', borderRadius: 9999,
-                background: 'rgba(255,255,255,0.03)', color: '#8a8f98',
-                fontSize: 13, border: '1px solid rgba(255,255,255,0.06)',
-              }}>{c}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PROBLEMA + SOLUÇÃO ===== */}
-      <section className="section" id="sobre">
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
-            <div>
-              <span className="section-label">O Problema</span>
-              <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 510, letterSpacing: '-0.02em', color: '#f7f8f8', marginBottom: 16 }}>
-                Prospecção 100% presencial<br />custa caro e escala pouco
-              </h2>
-              <p style={{ fontSize: 16, lineHeight: 1.7, color: '#8a8f98', marginBottom: 16 }}>
-                Hoje o Marcos roda 180 km por dia de visita. Cada km é tempo e 
-                dinheiro que poderiam estar crescendo o negócio. O resultado? 
-                Clientes ótimos onde já chegou, mas um Brasil inteiro esperando.
-              </p>
-              <p style={{ fontSize: 16, lineHeight: 1.7, color: '#8a8f98' }}>
-                A solução é simples: manter o presencial onde já funciona e 
-                somar uma frente digital que abre portas sem precisar de gasolina.
-              </p>
-            </div>
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(245,158,11,0.08), rgba(217,119,6,0.04))',
-              border: '1px solid rgba(245,158,11,0.15)',
-              borderRadius: 16, padding: 40,
-            }}>
-              <span style={{ fontSize: 48, marginBottom: 12, display: 'block' }}>🍯</span>
-              <h3 style={{ fontSize: 22, fontWeight: 600, color: '#fbbf24', marginBottom: 12 }}>
-                A Solução PIMEL
-              </h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {[
-                  { icon: '✅', text: 'Estratégia híbrida: presencial + digital' },
-                  { icon: '✅', text: 'Prospecção guiada por dados (Google Maps)' },
-                  { icon: '✅', text: 'Follow-up automatizado via WhatsApp' },
-                  { icon: '✅', text: 'Estoque pronto — entrega em todo Brasil' },
-                ].map((item, i) => (
-                  <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <span>{item.icon}</span>
-                    <span style={{ fontSize: 15, color: '#d0d6e0' }}>{item.text}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== DIFERENCIAL SISBI ===== */}
-      <section className="section" id="diferenciais" style={{ background: 'var(--bg-panel)' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <span className="section-label">Diferencial</span>
-            <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 510, letterSpacing: '-0.02em', color: '#f7f8f8', marginBottom: 12 }}>
-              SISBI: O Selo Que Abre <br />Fronteiras
-            </h2>
-            <p style={{ fontSize: 17, color: '#8a8f98', maxWidth: 520, margin: '0 auto' }}>
-              Poucos entrepostos têm essa certificação. Com ela, você vende para qualquer estado — sem burocracia interestadual.
-            </p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
-            {[
-              { icon: '📦', title: 'Venda Nacional', desc: 'Sem limitação geográfica. Atende SP, RJ, MG, Nordeste — o Brasil todo.' },
-              { icon: '🔬', title: 'Rastreabilidade', desc: 'Cada lote tem origem, data e análise. Qualidade que o mercado exige.' },
-              { icon: '🏭', title: 'Escala Industrial', desc: 'Mel a granel, sachês, vidros. Qualquer formato que seu ponto de venda precisar.' },
-            ].map((d, i) => (
-              <div key={i} style={{
-                background: 'rgba(255,255,255,0.03)', borderRadius: 12,
-                border: '1px solid rgba(255,255,255,0.06)', padding: 32,
-              }}>
-                <div style={{ fontSize: 36, marginBottom: 16 }}>{d.icon}</div>
-                <h3 style={{ fontSize: 18, fontWeight: 600, color: '#f7f8f8', marginBottom: 8 }}>{d.title}</h3>
-                <p style={{ fontSize: 14, color: '#8a8f98', lineHeight: 1.6 }}>{d.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PRODUTOS ===== */}
-      <section className="section">
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <span className="section-label">Portfólio</span>
-            <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 510, letterSpacing: '-0.02em', color: '#f7f8f8', marginBottom: 12 }}>
-              8 Linhas de Produto
-            </h2>
-            <p style={{ fontSize: 17, color: '#8a8f98', maxWidth: 500, margin: '0 auto' }}>
-              Do mel natural ao pólen apícola. Cada linha com embalagem e precificação para o seu canal.
-            </p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
-            {products.map((p, i) => (
-              <div key={i} style={{
-                background: 'rgba(255,255,255,0.02)',
-                border: '1px solid rgba(255,255,255,0.06)',
-                borderRadius: 12, padding: 24,
-                transition: 'all 0.2s',
-              }}>
-                <h3 style={{ fontSize: 17, fontWeight: 600, color: '#f7f8f8', marginBottom: 6 }}>{p.name}</h3>
-                <p style={{ fontSize: 13, color: '#fbbf24', fontWeight: 500, marginBottom: 8 }}>{p.tag}</p>
-                <p style={{ fontSize: 13, color: '#62666d' }}>{p.sizes}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CLIENTES + PROVA SOCIAL ===== */}
-      <section className="section" id="clientes" style={{ background: 'var(--bg-panel)' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
-            <div>
-              <span className="section-label">Prova Social</span>
-              <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 510, letterSpacing: '-0.02em', color: '#f7f8f8', marginBottom: 16 }}>
-                Quem Já Compra <br />Confia e Revende
-              </h2>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {clients.map(c => (
-                  <span key={c} style={{
-                    padding: '8px 16px', borderRadius: 8,
-                    background: 'rgba(255,255,255,0.03)', color: '#d0d6e0',
-                    fontSize: 14, border: '1px solid rgba(255,255,255,0.06)',
-                  }}>{c}</span>
-                ))}
-              </div>
-            </div>
-            <div style={{
-              background: 'rgba(255,255,255,0.03)', borderRadius: 12,
-              border: '1px solid rgba(255,255,255,0.06)', padding: 32,
-            }}>
-              <h3 style={{ fontSize: 20, fontWeight: 600, color: '#f7f8f8', marginBottom: 16 }}>
-                Pronto pra começar?
-              </h3>
-              <p style={{ fontSize: 14, color: '#8a8f98', lineHeight: 1.7, marginBottom: 20 }}>
-                Seu supermercado, padaria ou distribuidora pode ser o próximo 
-                cliente PIMEL. O estoque existe, a certificação está em dia e a 
-                entrega chega onde você estiver.
-              </p>
-              <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20revender%20mel%20PIMEL%20-%20certifica%C3%A7%C3%A3o%20SISBI" target="_blank" rel="noopener noreferrer" style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '12px 28px', borderRadius: 8,
-                background: 'linear-gradient(135deg, #25D366, #128C7E)',
-                color: '#fff', fontSize: 15, fontWeight: 600,
+                color: '#fff', fontSize: '1rem', fontWeight: 600,
                 textDecoration: 'none',
               }}>
-                📱 Fale com Marcos
+                Quero Revender →
+              </a>
+              <a href="#diferenciais" className="btn btn-ghost btn-lg">
+                Diferenciais
               </a>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ===== EXPANSÃO ===== */}
-      <section className="section">
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <span className="section-label">Roadmap</span>
-            <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 510, letterSpacing: '-0.02em', color: '#f7f8f8', marginBottom: 12 }}>
-              Plano de Expansão Nacional
-            </h2>
+        {/* Client strip */}
+        <div style={{
+          padding: '2rem 0',
+          borderTop: '1px solid rgba(255,255,255,0.04)',
+          borderBottom: '1px solid rgba(255,255,255,0.04)',
+          background: 'rgba(245,158,11,0.02)',
+        }}>
+          <div className="container">
+            <p style={{
+              fontSize: '0.75rem', color: '#62666d',
+              textTransform: 'uppercase', letterSpacing: '0.1em',
+              textAlign: 'center', marginBottom: '1rem', fontWeight: 600,
+            }}>
+              Já Atende Redes como
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
+              {clients.map(c => (
+                <span key={c} style={{
+                  padding: '0.375rem 0.875rem', borderRadius: 100,
+                  background: 'rgba(245,158,11,0.04)',
+                  color: '#b0b6c0', fontSize: '0.8125rem',
+                  border: '1px solid rgba(245,158,11,0.1)',
+                }}>{c}</span>
+              ))}
+            </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
-            {[
-              {
-                phase: 'Fase 1', period: 'Meses 1-3',
-                items: ['Consolidar Goiás + DF', 'Prospecção digital + presencial', '300+ leads qualificados', '5 novos supermercados/mês'],
-                color: '#f59e0b'
-              },
-              {
-                phase: 'Fase 2', period: 'Meses 3-6',
-                items: ['Expansão SP, RJ, MG', 'Distribuidores parceiros', 'Feiras do setor apícola', 'SEO ranqueando'],
-                color: '#fbbf24'
-              },
-              {
-                phase: 'Fase 3', period: 'Meses 6-12',
-                items: ['Presença nacional', 'Linha premium em todo Brasil', 'Parcerias com indústria', 'Marca reconhecida'],
-                color: '#fcd34d'
-              },
-            ].map((f, i) => (
-              <div key={i} style={{
-                background: 'rgba(255,255,255,0.02)', borderRadius: 12,
-                border: '1px solid rgba(255,255,255,0.06)', padding: 32,
-                position: 'relative',
-              }}>
-                <div style={{
-                  position: 'absolute', top: 0, left: 0, right: 0, height: 3,
-                  background: f.color, borderRadius: '12px 12px 0 0',
-                }} />
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 20 }}>
-                  <span style={{ fontSize: 14, fontWeight: 600, color: f.color }}>{f.phase}</span>
-                  <span style={{ fontSize: 12, color: '#62666d' }}>{f.period}</span>
-                </div>
-                <ul style={{ listStyle: 'none', padding: 0 }}>
-                  {f.items.map((item, j) => (
-                    <li key={j} style={{
-                      fontSize: 14, color: '#d0d6e0', padding: '6px 0',
-                      borderBottom: j < f.items.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
-                      display: 'flex', alignItems: 'center', gap: 8,
-                    }}>
-                      <span style={{ color: '#10b981', fontSize: 12 }}>◆</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+        </div>
+
+        {/* Problem / Solution */}
+        <section className="product-section">
+          <div className="container">
+            <div className="grid-2">
+              <div>
+                <span className="section-label" style={{ color: '#fbbf24' }}>O Problema</span>
+                <h2 className="section-title" style={{ color: '#f7f8f8' }}>
+                  Prospecção 100% presencial<br />custa caro e escala pouco
+                </h2>
+                <p style={{ fontSize: '1rem', lineHeight: 1.7, color: '#8a8f98' }}>
+                  Hoje o Marcos roda 180 km por dia de visita. Cada km é tempo e 
+                  dinheiro que poderiam estar crescendo o negócio. Clientes ótimos onde já chegou, 
+                  mas um Brasil inteiro esperando.
+                </p>
+                <p style={{ fontSize: '1rem', lineHeight: 1.7, color: '#8a8f98', marginTop: '1rem' }}>
+                  A solução é simples: manter o presencial onde já funciona e 
+                  somar uma frente digital que abre portas sem precisar de gasolina.
+                </p>
               </div>
-            ))}
+              <div className="highlight-box" style={{
+                background: 'linear-gradient(135deg, rgba(245,158,11,0.08), rgba(217,119,6,0.03))',
+                border: '1px solid rgba(245,158,11,0.15)',
+              }}>
+                <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🍯</div>
+                <h4 style={{ color: '#fbbf24', fontSize: '1.25rem' }}>A Solução PIMEL</h4>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1rem' }}>
+                  {[
+                    'Estratégia híbrida: presencial + digital',
+                    'Prospecção guiada por dados',
+                    'Follow-up automatizado via WhatsApp',
+                    'Estoque pronto — entrega em todo Brasil',
+                  ].map((text, i) => (
+                    <div key={i} style={{ display: 'flex', gap: '0.625rem', alignItems: 'flex-start' }}>
+                      <span style={{ color: '#fbbf24', fontWeight: 700 }}>✓</span>
+                      <span style={{ fontSize: '0.9375rem', color: '#d0d6e0' }}>{text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ===== CTA FINAL ===== */}
-      <section style={{
-        padding: '80px 0', textAlign: 'center',
-        background: 'linear-gradient(180deg, transparent, rgba(245,158,11,0.04))',
-        borderTop: '1px solid rgba(245,158,11,0.1)',
-      }}>
-        <div className="container">
-          <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 600, color: '#f7f8f8', marginBottom: 12, letterSpacing: '-0.02em' }}>
-            Vamos Levar o Mel PIMEL<br />para Suas Prateleiras
-          </h2>
-          <p style={{ fontSize: 16, color: '#8a8f98', maxWidth: 480, margin: '0 auto 28px' }}>
-            Um clique no botão abaixo e você fala direto com Marcos para montar a proposta comercial do seu negócio.
-          </p>
-          <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20revender%20mel%20PIMEL%20-%20certifica%C3%A7%C3%A3o%20SISBI" target="_blank" rel="noopener noreferrer" style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: '16px 40px', borderRadius: 8,
-            background: 'linear-gradient(135deg, #25D366, #128C7E)',
-            color: '#fff', fontSize: 17, fontWeight: 600,
-            textDecoration: 'none',
-          }}>
-            📱 Fale com Marcos no WhatsApp
-          </a>
-        </div>
-      </section>
+        {/* SISBI Highlights */}
+        <section className="product-section product-section-alt" id="diferenciais">
+          <div className="container">
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+              <span className="section-label" style={{ color: '#fbbf24' }}>Diferencial</span>
+              <h2 className="section-title" style={{ color: '#f7f8f8' }}>
+                SISBI: O Selo Que Abre Fronteiras
+              </h2>
+              <p className="section-sub" style={{ margin: '0 auto' }}>
+                Poucos entrepostos têm essa certificação. Com ela, sua rede vende 
+                para qualquer estado — sem burocracia interestadual.
+              </p>
+            </div>
+            <div className="grid-3">
+              {highlights.map((h, i) => (
+                <div key={i} className="feature-card">
+                  <div className="feature-card-icon">{h.icon}</div>
+                  <h4>{h.title}</h4>
+                  <p>{h.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      {/* ===== FOOTER ===== */}
-      <footer className="footer">
-        <div className="container">
-          <p style={{ fontSize: 13, color: '#62666d', marginBottom: 4 }}>
-            PIMEL — Entreposto de Mel e Cera de Abelha · Certificação SISBI
-          </p>
-          <p style={{ fontSize: 12, color: '#4a4e54' }}>
-            <Link to="/" style={{ color: '#62666d' }}>← Voltar ao portfólio</Link>
-          </p>
-        </div>
-      </footer>
+        {/* Produtos */}
+        <section className="product-section" id="produtos">
+          <div className="container">
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+              <span className="section-label" style={{ color: '#fbbf24' }}>Portfólio</span>
+              <h2 className="section-title" style={{ color: '#f7f8f8' }}>
+                8 Linhas de Produto
+              </h2>
+              <p className="section-sub" style={{ margin: '0 auto' }}>
+                Do mel natural ao pólen apícola. Cada linha com embalagem e precificação para o seu canal.
+              </p>
+            </div>
+            <div className="grid-4">
+              {products.map((p, i) => (
+                <div key={i} className="feature-card" style={{ padding: '1.5rem' }}>
+                  <div style={{ fontSize: '1.75rem', marginBottom: '0.75rem' }}>{p.emoji}</div>
+                  <h4 style={{ fontSize: '1rem' }}>{p.name}</h4>
+                  <p style={{ color: '#fbbf24', fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.375rem' }}>{p.tag}</p>
+                  <p style={{ fontSize: '0.8125rem', color: '#62666d' }}>{p.sizes}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Clientes */}
+        <section className="product-section product-section-alt" id="clientes">
+          <div className="container">
+            <div className="grid-2" style={{ alignItems: 'center' }}>
+              <div>
+                <span className="section-label" style={{ color: '#fbbf24' }}>Prova Social</span>
+                <h2 className="section-title" style={{ color: '#f7f8f8' }}>
+                  Quem Já Compra<br />Confia e Revende
+                </h2>
+                <p style={{ fontSize: '1rem', lineHeight: 1.7, color: '#8a8f98', marginBottom: '1.5rem' }}>
+                  Oito grandes redes do Centro-Oeste já estão no portfólio PIMEL. 
+                  E todas continuam comprando.
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  {clients.map(c => (
+                    <span key={c} style={{
+                      padding: '0.5rem 1rem', borderRadius: 8,
+                      background: 'rgba(245,158,11,0.04)',
+                      color: '#d0d6e0', fontSize: '0.9375rem',
+                      border: '1px solid rgba(245,158,11,0.1)',
+                    }}>{c}</span>
+                  ))}
+                </div>
+              </div>
+              <div style={{
+                background: 'linear-gradient(135deg, rgba(245,158,11,0.05), transparent)',
+                borderRadius: 20,
+                border: '1px solid rgba(245,158,11,0.12)',
+                padding: '3rem',
+                textAlign: 'center',
+              }}>
+                <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🐝</div>
+                <p style={{ fontSize: '0.9375rem', color: '#8a8f98', fontStyle: 'italic' }}>
+                  "O mel PIMEL tem qualidade que o nosso cliente reconhece. 
+                  É um produto que vende sozinho na gôndola."
+                </p>
+                <p style={{ fontSize: '0.8125rem', color: '#fbbf24', marginTop: '1rem', fontWeight: 500 }}>
+                  — Rede Superbom
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA final */}
+        <section className="product-section" style={{ textAlign: 'center' }}>
+          <div className="container">
+            <h2 className="section-title" style={{ color: '#f7f8f8', marginBottom: '0.75rem' }}>
+              Quer Revender Mel PIMEL?
+            </h2>
+            <p className="section-sub" style={{ margin: '0 auto 2rem' }}>
+              Supermercados, atacados, farmácias e indústrias — 
+              entre em contato e receba a tabela de preços para revendedor.
+            </p>
+            <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20revender%20mel%20PIMEL%20-%20certifica%C3%A7%C3%A3o%20SISBI" target="_blank" rel="noopener noreferrer" className="btn btn-lg" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              padding: '1rem 2.5rem', borderRadius: 10,
+              background: 'linear-gradient(135deg, #22c55e, #16a34a)',
+              color: '#fff', fontSize: '1.05rem', fontWeight: 600,
+              textDecoration: 'none',
+            }}>
+              📱 Fale com Marcos no WhatsApp
+            </a>
+            <div style={{ marginTop: '1rem' }}>
+              <Link to="/" className="back-link">← Voltar ao portfólio</Link>
+            </div>
+          </div>
+        </section>
+
+        <footer className="footer">
+          <div className="container">
+            <p>PIMEL — Entreposto de Mel e Cera de Abelha · Certificação SISBI · Venda Nacional</p>
+          </div>
+        </footer>
+      </section>
     </div>
   )
 }
