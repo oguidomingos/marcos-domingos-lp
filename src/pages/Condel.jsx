@@ -1,310 +1,171 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
-
-const brands = [
-  { name: 'Castelo Forte', desc: 'Standard e resistentes' },
-  { name: 'Casa Forte', desc: 'Linha premium' },
-  { name: 'Hidromar', desc: 'Eletro-hidráulicos' },
-  { name: 'Stoptone', desc: 'Interruptores e tomadas' },
-  { name: 'Sicame', desc: 'Conectores e acessórios' },
-  { name: 'Ficap', desc: 'Fios e cabos' },
-  { name: 'Pratec', desc: 'Eletrodutos e acessórios' },
-  { name: 'Pial Legrand', desc: 'Material de alta linha' },
-]
-
-const steps = [
-  { icon: '1', title: 'Peça', desc: 'Orçamento por WhatsApp ou visita.' },
-  { icon: '2', title: 'Cotação', desc: 'Melhor preço do mercado em minutos.' },
-  { icon: '3', title: 'Separação', desc: 'Estoque próprio em Taguatinga.' },
-  { icon: '4', title: 'Entrega', desc: 'Rápida em Brasília e entorno.' },
-]
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 export default function Condel() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    visible: (i = 0) => ({ opacity: 1, y: 0, transition: { delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] } }),
+  }
+
   return (
     <div>
       {/* Header */}
       <header className="header">
         <div className="container">
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', textDecoration: 'none' }}>
-            <div style={{
-              width: 36, height: 36, borderRadius: 6,
-              background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '0.875rem', fontWeight: 700, color: '#fff',
-              fontFamily: "'JetBrains Mono', monospace",
-            }}>C</div>
-            <span style={{
-              fontSize: '1.125rem', fontWeight: 600,
-              color: '#f7f8f8', letterSpacing: '0em',
-            }}>
-              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}>CONDEL</span>
-            </span>
+          <Link to="/" className="logo">
+            <span className="logo-icon" style={{ background: 'linear-gradient(135deg, #3b82f6, #2563eb)' }}>C</span>
+            Condel
           </Link>
           <nav>
             <ul className="nav-links">
+              <li><Link to="/">Início</Link></li>
               <li><a href="#marcas">Marcas</a></li>
-              <li><a href="#processo">Processo</a></li>
-              <li><a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20cotar%20material%20el%C3%A9trico%20com%20a%20Condel" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.8125rem', background: 'linear-gradient(135deg, #3b82f6, #2563eb)' }}>
-                Cotar Preço
-              </a></li>
+              <li><a href="#diferenciais">Diferenciais</a></li>
+              <li><a href="#contato" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.8125rem', background: '#3b82f6', color: '#fff' }}>Cotar</a></li>
             </ul>
+            <button className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+              <span /><span /><span />
+            </button>
           </nav>
         </div>
       </header>
 
-      {/* Hero */}
-      <div className="product-hero" style={{
-        background: 'linear-gradient(180deg, rgba(59,130,246,0.03) 0%, transparent 100%)',
-        position: 'relative', overflow: 'hidden',
-      }}>
-        {/* Grid pattern */}
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: `
-            linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
-          pointerEvents: 'none',
-          opacity: 0.5,
-        }} />
-        <div className="product-hero-glow" style={{
-          background: 'radial-gradient(ellipse, rgba(59,130,246,0.05) 0%, transparent 60%)',
-        }} />
-        <section className="container" style={{
-          position: 'relative', zIndex: 1,
-          paddingTop: '6rem', paddingBottom: '4rem',
-        }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            padding: '0.375rem 1rem', borderRadius: 6,
-            background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.2)',
-            color: '#60a5fa', fontSize: '0.8125rem', fontWeight: 500,
-            marginBottom: '1.5rem',
-            fontFamily: "'JetBrains Mono', monospace",
-          }}>
-            $ Estoque Próprio · Taguatinga-DF
-          </div>
-          <h1 style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 'clamp(2rem, 6vw, 4rem)',
-            fontWeight: 400,
-            lineHeight: 1.05,
-            color: '#f7f8f8',
-            marginBottom: '1rem',
-          }}>
-            <span style={{ color: '#3b82f6', fontWeight: 500 }}>Condel</span>_<br />
-            condutores_elétricos
-          </h1>
-          <p style={{
-            color: '#8a8f98', maxWidth: '560px', marginBottom: '2rem',
-            fontSize: '1rem', lineHeight: 1.7,
-            fontFamily: "'DM Sans', sans-serif",
-          }}>
-            Depósito próprio em Taguatinga com as principais marcas do mercado elétrico. 
-            Preço justo, entrega rápida e estoque que não deixa sua obra parada.
-          </p>
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-            <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20cotar%20material%20el%C3%A9trico%20com%20a%20Condel" target="_blank" rel="noopener noreferrer" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              padding: '1rem 2.25rem', borderRadius: 6,
-              background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-              color: '#fff', fontSize: '0.9375rem', fontWeight: 500,
-              textDecoration: 'none',
-              fontFamily: "'JetBrains Mono', monospace",
-            }}>
-              Cotar_Preço()
-            </a>
-            <a href="#marcas" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              padding: '1rem 2.25rem', borderRadius: 6,
-              border: '2px solid #3b82f6',
-              color: '#60a5fa', fontSize: '0.9375rem', fontWeight: 500,
-              textDecoration: 'none',
-              fontFamily: "'JetBrains Mono', monospace",
-            }}>
-              Ver_Marcas()
-            </a>
-          </div>
-        </section>
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+        <Link to="/" onClick={() => setMenuOpen(false)}>Início</Link>
+        <a href="#marcas" onClick={() => setMenuOpen(false)}>Marcas</a>
+        <a href="#diferenciais" onClick={() => setMenuOpen(false)}>Diferenciais</a>
+        <a href="#contato" onClick={() => setMenuOpen(false)}>Cotar</a>
       </div>
+
+      {/* Hero */}
+      <section className="product-hero">
+        <div className="product-hero-glow" style={{ background: 'radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, transparent 65%)' }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <span className="hero-badge" style={{ background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.2)', color: '#60a5fa' }}>
+              ⚡ Distribuição Elétrica
+            </span>
+          </motion.div>
+
+          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.5 }}>
+            Condel Condutores
+            <br />
+            <span style={{ fontWeight: 300, fontSize: '0.45em', display: 'block', marginTop: '0.25rem' }}>
+              Preço Justo na Distribuição de Materiais Elétricos
+            </span>
+          </motion.h1>
+
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22, duration: 0.5 }}>
+            Depósito próprio em Taguatinga-DF — saída imediata, preço que ganha da concorrência. 
+            <span style={{ color: 'var(--text-primary)' }}> 150+ lojas atendidas.</span>
+          </motion.p>
+
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32, duration: 0.5 }}
+            style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}
+          >
+            <a href="#contato" className="btn btn-lg" style={{ background: '#3b82f6', color: '#fff' }}>
+              📋 Solicitar Cotação
+            </a>
+            <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20cotar%20materiais%20el%C3%A9tricos%20com%20a%20Condel" target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-lg">
+              WhatsApp
+            </a>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Stats */}
-      <div style={{
-        borderTop: '1px solid rgba(59,130,246,0.12)',
-        borderBottom: '1px solid rgba(59,130,246,0.12)',
-        padding: '2rem 0',
-        background: 'rgba(59,130,246,0.02)',
-      }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
-          {[
-            { value: '150+', label: 'Lojas Atendidas' },
-            { value: '8+', label: 'Marcas Principais' },
-            { value: '24h', label: 'Cotação Rápida' },
-          ].map((item, i) => (
-            <div key={i} style={{ textAlign: 'center' }}>
-              <div style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: 'clamp(2rem, 4vw, 3rem)',
-                fontWeight: 500,
-                color: '#3b82f6', marginBottom: '0.25rem',
-              }}>
-                {item.value}
-              </div>
-              <div style={{ fontSize: '0.8125rem', color: '#8a8f98' }}>
-                {item.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <motion.div className="stats-strip" style={{ borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}
+        initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+      >
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#3b82f6' }}>150+</div><div className="stat-label">Lojas Atendidas</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#3b82f6' }}>15+</div><div className="stat-label">Marcas Premium</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#3b82f6' }}>5.000+</div><div className="stat-label">Itens em Estoque</div></div>
+      </motion.div>
 
-      {/* Brands */}
-      <section className="product-section" id="marcas">
+      {/* Why Condel */}
+      <section className="section-base" id="diferenciais">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <span className="section-label" style={{ color: '#60a5fa' }}>Marcas</span>
-            <h2 className="section-title" style={{ color: '#f7f8f8' }}>
-              Portfólio Técnico
-            </h2>
-            <p className="section-sub" style={{ margin: '0 auto' }}>
-              As marcas que o mercado confia. Todas com estoque em Taguatinga.
-            </p>
-          </div>
-          <div className="grid-4">
-            {brands.map((b, i) => (
-              <div key={i} className="feature-card" style={{
-                padding: '1.25rem',
-                borderTop: '2px solid rgba(59,130,246,0.3)',
-              }}>
-                <h4 style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: '0.9375rem',
-                  fontWeight: 500,
-                  color: '#f7f8f8',
-                  marginBottom: '0.375rem',
-                }}>
-                  {b.name}
-                </h4>
-                <p style={{ fontSize: '0.8125rem', color: '#62666d' }}>
-                  {b.desc}
-                </p>
-              </div>
+          <motion.div style={{ textAlign: 'center', marginBottom: '3rem' }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            <span className="section-label" style={{ color: '#60a5fa', borderColor: 'rgba(59,130,246,0.2)', background: 'rgba(59,130,246,0.05)' }}>Diferenciais</span>
+            <h2 className="section-title">Por que Condel?</h2>
+          </motion.div>
+
+          <div className="grid-3">
+            {[
+              { icon: '🏭', title: 'Depósito Próprio', desc: 'Estoque permanente em Taguatinga-DF. Seu pedido sai sem depender de terceiros.' },
+              { icon: '🚚', title: 'Entrega Rápida', desc: 'Cobertura total do DF e entorno. Programação semanal para Goiás.' },
+              { icon: '💰', title: 'Preço Justo', desc: 'Margem para você revender com lucro. Sem taxa de canal, sem atravessador.' },
+              { icon: '📊', title: 'Linha Completa', desc: 'Condutores, quadros, disjuntores, tomadas, fios e cabos — uma só nota.' },
+              { icon: '✓', title: 'Produto Certificado', desc: 'INMETRO, ABINEE, normas NBR. Qualidade que passa na fiscalização.' },
+              { icon: '🤝', title: 'Parceria de Longo Prazo', desc: 'Mais de 150 lojas confiam. Condições especiais para cliente fidelizado.' },
+            ].map((item, i) => (
+              <motion.div className="card" key={i}
+                variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-30px' }} custom={i}
+              >
+                <div className="card-icon">{item.icon}</div>
+                <h4>{item.title}</h4>
+                <p>{item.desc}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Diferenciais */}
-      <section className="product-section product-section-alt">
+      {/* Brands */}
+      <section className="section-alt" id="marcas">
         <div className="container">
-          <div className="grid-2">
-            <div>
-              <span className="section-label" style={{ color: '#60a5fa' }}>Diferencial</span>
-              <h2 className="section-title" style={{ color: '#f7f8f8' }}>
-                Por Que a Condel
-              </h2>
-              <p style={{ fontSize: '1rem', lineHeight: 1.7, color: '#8a8f98', marginBottom: '1.5rem' }}>
-                Mais de 150 lojas na base. O segredo não é milagre — é estoque próprio 
-                e preço justo. Enquanto outros estão comprando, a Condel já está entregando.
-              </p>
-              <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {[
-                  'Depósito abastecido com as marcas que vendem',
-                  'Preço competitivo — cotação em minutos',
-                  'Entrega rápida em Brasília e Entorno',
-                  'Atendimento personalizado para lojistas',
-                ].map((item, i) => (
-                  <li key={i} style={{ display: 'flex', gap: '0.625rem', alignItems: 'flex-start' }}>
-                    <span style={{ color: '#3b82f6', fontWeight: 700 }}>→</span>
-                    <span style={{ fontSize: '0.9375rem', color: '#b0b6c0' }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div id="processo" style={{
-              background: 'linear-gradient(135deg, rgba(59,130,246,0.06), transparent)',
-              borderRadius: 12,
-              border: '1px solid rgba(59,130,246,0.12)',
-              padding: '2.5rem',
-            }}>
-              <h4 style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: '1rem', fontWeight: 500,
-                color: '#3b82f6', marginBottom: '1.5rem',
-              }}>
-                + Como Funciona
-              </h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                {steps.map((s, i) => (
-                  <div key={i} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                    <div style={{
-                      width: 32, height: 32, borderRadius: 6,
-                      background: 'rgba(59,130,246,0.1)',
-                      border: '1px solid rgba(59,130,246,0.2)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: '0.8125rem', fontWeight: 500,
-                      color: '#60a5fa', flexShrink: 0,
-                    }}>
-                      {s.icon}
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#f7f8f8', marginBottom: '0.125rem' }}>
-                        {s.title}
-                      </div>
-                      <div style={{ fontSize: '0.8125rem', color: '#62666d' }}>
-                        {s.desc}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20cotar%20material%20el%C3%A9trico%20com%20a%20Condel" target="_blank" rel="noopener noreferrer" style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
-                marginTop: '1.5rem',
-                padding: '0.875rem', borderRadius: 6,
-                background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                color: '#fff', fontSize: '0.875rem', fontWeight: 500,
-                textDecoration: 'none',
-                fontFamily: "'JetBrains Mono', monospace",
-              }}>
-                Solicitar_Cotação()
+          <motion.div style={{ textAlign: 'center', marginBottom: '3rem' }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            <span className="section-label" style={{ color: '#60a5fa', borderColor: 'rgba(59,130,246,0.2)', background: 'rgba(59,130,246,0.05)' }}>Marcas</span>
+            <h2 className="section-title">Distribuímos as Principais Marcas</h2>
+          </motion.div>
+
+          <div className="client-pills" style={{ marginBottom: '2rem' }}>
+            {['Castelo Forte', 'Casa Forte', 'Pirelli', 'Sil Fios', 'Lorenzetti', 'Tigre', 'Amanco', 'Siemens', 'Schneider', 'Steck', 'Cemar', 'Bticino', 'FanLux', 'Elgin', 'Krona'].map((m, i) => (
+              <span key={i} className="client-pill" style={{ fontSize: '0.9375rem', padding: '0.625rem 1.25rem', background: 'rgba(59,130,246,0.04)', borderColor: 'rgba(59,130,246,0.1)' }}>{m}</span>
+            ))}
+          </div>
+
+          <motion.p style={{ textAlign: 'center', color: 'var(--text-tertiary)', fontSize: '0.875rem' }}
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            E muitas outras. Se tem na construção civil, <strong style={{ color: 'var(--text-primary)' }}>a Condel tem no depósito.</strong>
+          </motion.p>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="cta-section" id="contato">
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+            <h2>Faça Sua Cotação</h2>
+            <p>Solicite sua lista de preços Condel. Depósito em Taguatinga, entrega no DF e entorno.</p>
+            <div className="btn-row">
+              <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20fazer%20uma%20cota%C3%A7%C3%A3o%20com%20a%20Condel" target="_blank" rel="noopener noreferrer" className="btn btn-lg" style={{ background: '#3b82f6', color: '#fff' }}>
+                📋 Cotar Agora
               </a>
+              <Link to="/" className="btn btn-ghost btn-lg">
+                ← Voltar ao Início
+              </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="product-section" style={{ textAlign: 'center' }}>
-        <div className="container">
-          <h2 className="section-title" style={{ color: '#f7f8f8', marginBottom: '0.75rem' }}>
-            Vamos Conversar?
-          </h2>
-          <p className="section-sub" style={{ margin: '0 auto 2rem' }}>
-            Lojistas de material de construção e elétrico — cotação rápida, 
-            entrega programada, preço que fecha.
-          </p>
-          <a href="https://wa.me/5561936180578?text=Ol%C3%A1!%20Quero%20cotar%20material%20el%C3%A9trico%20com%20a%20Condel" target="_blank" rel="noopener noreferrer" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            padding: '1rem 2.5rem', borderRadius: 6,
-            background: 'linear-gradient(135deg, #22c55e, #16a34a)',
-            color: '#fff', fontSize: '0.9375rem', fontWeight: 500,
-            textDecoration: 'none',
-            fontFamily: "'JetBrains Mono', monospace",
-          }}>
-            Iniciar_Chat()
-          </a>
-          <div style={{ marginTop: '1rem' }}>
-            <Link to="/" className="back-link">← Voltar ao portfólio</Link>
-          </div>
-        </div>
-      </section>
-
+      {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <p>Condel Condutores Elétricos — Depósito em Taguatinga-DF · 150+ Lojas Atendidas</p>
+          <p>© 2026 Condel Condutores Elétricos</p>
+          <p style={{ marginTop: '0.375rem', fontSize: '0.8125rem', color: 'var(--text-tertiary)' }}>
+            Taguatinga-DF · (61) 93618-0578
+          </p>
         </div>
       </footer>
     </div>

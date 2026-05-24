@@ -1,293 +1,303 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
-
-const products = [
-  { name: 'Linguiça Toscana', desc: 'Clássica artesanal. A receita que começou tudo em 2000.', weight: 'Embalagem 1kg' },
-  { name: 'Linguiça Calabresa', desc: 'Defumada no ponto certo. A preferida das churrascarias.', weight: 'Embalagem 1kg' },
-  { name: 'Linguiça de Frango', desc: 'Leve, suculenta, temperada. Ideal para o dia a dia.', weight: 'Embalagem 1kg' },
-  { name: 'Linguiça Mista', desc: 'O equilíbrio perfeito de carnes. Sabor que agrada todo mundo.', weight: 'Embalagem 1kg' },
-  { name: 'Linguiça com Queijo', desc: 'Recheada com queijo derretido. A queridinha do açougue.', weight: 'Embalagem 1kg' },
-  { name: 'Linguiça Apimentada', desc: 'Pimenta na medida certa. Pra quem gosta de emoção.', weight: 'Embalagem 1kg' },
-]
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 export default function LinguicaExata() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    visible: (i = 0) => ({ opacity: 1, y: 0, transition: { delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] } }),
+  }
+
   return (
     <div>
       {/* Header */}
       <header className="header">
         <div className="container">
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', textDecoration: 'none' }}>
-            <span className="logo-mark" style={{
-              background: 'linear-gradient(135deg, #ef4444, #b91c1c)',
-              borderRadius: 6, fontSize: '1rem',
-            }}>L</span>
-            <span className="logo" style={{ fontSize: '1.125rem', fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.05em' }}>
-              LINGUIÇA EXATA
-            </span>
+          <Link to="/" className="logo">
+            <span className="logo-icon" style={{ background: 'linear-gradient(135deg, #ef4444, #b91c1c)' }}>L</span>
+            Linguiça Exata
           </Link>
           <nav>
             <ul className="nav-links">
+              <li><Link to="/">Início</Link></li>
               <li><a href="#diferenciais">Diferenciais</a></li>
-              <li><a href="#produtos">Produtos</a></li>
-              <li><a href="https://wa.me/5561936180578?text=Ol%C3%A1%20Marcos!%20Quero%20comprar%20Lingui%C3%A7a%20Exata%20para%20meu%20neg%C3%B3cio" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.8125rem', background: 'linear-gradient(135deg, #ef4444, #dc2626)' }}>
-                Comprar Agora
-              </a></li>
+              <li><a href="#para-quem">Para Quem</a></li>
+              <li><a href="#linhas">Linhas</a></li>
+              <li><a href="#contato" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.8125rem', background: '#ef4444', color: '#fff' }}>Encomendar</a></li>
             </ul>
+            <button className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+              <span /><span /><span />
+            </button>
           </nav>
         </div>
       </header>
 
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+        <Link to="/" onClick={() => setMenuOpen(false)}>Início</Link>
+        <a href="#diferenciais" onClick={() => setMenuOpen(false)}>Diferenciais</a>
+        <a href="#para-quem" onClick={() => setMenuOpen(false)}>Para Quem</a>
+        <a href="#linhas" onClick={() => setMenuOpen(false)}>Linhas</a>
+        <a href="#contato" onClick={() => setMenuOpen(false)}>Encomendar</a>
+      </div>
+
       {/* Hero */}
-      <div className="product-hero" style={{
-        background: 'linear-gradient(180deg, rgba(239,68,68,0.04) 0%, transparent 100%)',
-        borderBottom: 'none',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
-        {/* Decorative "butcher" pattern lines */}
-        <div style={{
-          position: 'absolute', top: 0, right: 0, bottom: 0, width: '40%',
-          background: 'repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(239,68,68,0.02) 2px, rgba(239,68,68,0.02) 4px)',
-          opacity: 0.5,
-          pointerEvents: 'none',
-        }} />
-        <div className="product-hero-glow" style={{
-          background: 'radial-gradient(ellipse, rgba(239,68,68,0.06) 0%, transparent 60%)',
-        }} />
-        <section className="container" style={{
-          position: 'relative', zIndex: 1,
-          paddingTop: '6rem', paddingBottom: '4rem',
-        }}>
-          <div className="hero-badge" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            padding: '0.375rem 1rem', borderRadius: 100,
-            background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)',
-            color: '#f87171', fontSize: '0.8125rem', fontWeight: 500, marginBottom: '1.5rem',
-          }}>
-            🥩 Tradição desde 2000 — Anápolis-GO
-          </div>
-          <h1 style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 'clamp(3rem, 10vw, 7rem)',
-            fontWeight: 400,
-            lineHeight: 0.95,
-            color: '#f7f8f8',
-            marginBottom: '1rem',
-            letterSpacing: '0.02em',
-          }}>
-            Carne de Verdade.<br />
-            <span style={{ color: '#ef4444' }}>Gosto de Tradição.</span>
-          </h1>
-          <p style={{ color: '#8a8f98', maxWidth: '560px', marginBottom: '2rem', fontSize: '1.05rem', lineHeight: 1.7 }}>
-            Há 25 anos fazendo linguiça como antigamente — carne selecionada, tempero na mão, 
-            defumação no ponto certo. Sem aditivos desnecessários. Só o que presta.
-          </p>
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-            <a href="https://wa.me/5561936180578?text=Ol%C3%A1%20Marcos!%20Quero%20comprar%20Lingui%C3%A7a%20Exata%20para%20meu%20neg%C3%B3cio" target="_blank" rel="noopener noreferrer" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              padding: '1rem 2.25rem', borderRadius: 0,
-              background: '#ef4444',
-              color: '#fff', fontSize: '1rem', fontWeight: 600,
-              textDecoration: 'none', textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-            }}>
-              Peça Seu Pedido →
-            </a>
-            <a href="#diferenciais" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              padding: '1rem 2.25rem', borderRadius: 0,
-              border: '2px solid #ef4444',
-              color: '#ef4444', fontSize: '1rem', fontWeight: 600,
-              textDecoration: 'none', textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-            }}>
-              Diferenciais
-            </a>
-          </div>
-        </section>
-      </div>
+      <section className="product-hero">
+        <div className="product-hero-glow" style={{ background: 'radial-gradient(ellipse, rgba(239,68,68,0.08) 0%, transparent 65%)' }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <span className="hero-badge" style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: '#f87171' }}>
+              🥩 Artesanal — Desde 2000
+            </span>
+          </motion.div>
 
-      {/* Numbers Strip */}
-      <div style={{
-        background: '#111113',
-        borderTop: '1px solid rgba(239,68,68,0.15)',
-        borderBottom: '1px solid rgba(239,68,68,0.15)',
-        padding: '2.5rem 0',
-      }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
-          {[
-            { value: '25', label: 'Anos de Tradição', sub: 'Desde 2000' },
-            { value: '6', label: 'Linhas', sub: 'Sabores únicos' },
-            { value: '180km', label: 'Por Dia', sub: 'Entregas contínuas' },
-          ].map((item, i) => (
-            <div key={i} style={{ textAlign: 'center' }}>
-              <div style={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                lineHeight: 1,
-                color: '#ef4444', marginBottom: '0.25rem',
-              }}>
-                {item.value}
-              </div>
-              <div style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#f7f8f8', marginBottom: '0.125rem' }}>
-                {item.label}
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#62666d' }}>
-                {item.sub}
-              </div>
-            </div>
-          ))}
+          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.5 }}>
+            Linguiça Exata
+            <br />
+            <span style={{ fontWeight: 300, fontSize: '0.45em', display: 'block', marginTop: '0.25rem' }}>
+              O Sabor que Fideliza o Freguês
+            </span>
+          </motion.h1>
+
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22, duration: 0.5 }}>
+            25 anos fazendo linguiça como antigamente — receita artesanal, carne selecionada, 
+            <span style={{ color: 'var(--text-primary)' }}> o sabor que faz o cliente voltar.</span>
+          </motion.p>
+
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32, duration: 0.5 }}
+            style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}
+          >
+            <a href="#contato" className="btn btn-lg" style={{ background: '#ef4444', color: '#fff' }}>
+              🥩 Quero Revender
+            </a>
+            <a href="https://wa.me/556199542377?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20Lingui%C3%A7a%20Exata" target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-lg">
+              WhatsApp
+            </a>
+          </motion.div>
         </div>
-      </div>
+      </section>
 
-      {/* Diferenciais */}
-      <section className="product-section product-section-alt" id="diferenciais">
+      {/* Stats */}
+      <motion.div className="stats-strip" style={{ borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}
+        initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+      >
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#ef4444' }}>25</div><div className="stat-label">Anos de Tradição</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#ef4444' }}>6</div><div className="stat-label">Linhas de Linguiça</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#ef4444' }}>Anápolis</div><div className="stat-label">GO — Produção Própria</div></div>
+      </motion.div>
+
+      {/* Differences */}
+      <section className="section-base" id="diferenciais">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <span className="section-label" style={{ color: '#ef4444' }}>Por Que Somos a Exata</span>
-            <h2 className="section-title" style={{ color: '#f7f8f8' }}>
-              O Diferencial Está no Processo
-            </h2>
+          <motion.div style={{ textAlign: 'center', marginBottom: '3rem' }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            <span className="section-label" style={{ color: '#f87171', borderColor: 'rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.05)' }}>Por que Linguiça Exata?</span>
+            <h2 className="section-title">Por que virar cliente e não sair mais?</h2>
             <p className="section-sub" style={{ margin: '0 auto' }}>
-              Não é receita de internet. São 25 anos de açougue, de fornecedor 
-              que não corta custo, de cliente que volta.
+              Porque o sabor prende. E a margem segura.
             </p>
-          </div>
+          </motion.div>
+
           <div className="grid-3">
             {[
-              { icon: '🥩', title: 'Carne Selecionada', desc: 'Cortes nobres, sem aproveitamentos. A matéria-prima faz 80% do resultado.' },
-              { icon: '🧂', title: 'Tempero Artesanal', desc: 'Na mão, do jeito que aprenderam os mestres açougueiros. Sem misturas industriais.' },
-              { icon: '🔥', title: 'Defumação no Ponto', desc: 'Lenha certa, tempo certo. A calabresa que todo churrasqueiro reconhece.' },
+              { icon: '🧑‍🍳', title: '25 Anos de Estrada', desc: 'Uma receita que foi aperfeiçoada por duas gerações. O paladar do Centro-Oeste conhece e aprova.' },
+              { icon: '🥩', title: 'Carne Selecionada', desc: 'Cortes nobres, sem excesso de gordura. A rendibilidade na chapa é visível.' },
+              { icon: '🧂', title: 'Tempero Proprietário', desc: 'A receita secreta que faz cada mordida ter exatamente o ponto certo de sal e especiarias.' },
+              { icon: '📦', title: '6 Linhas de Produto', desc: 'De tradicional à apimentada, de calabresa à toscana — variedade que enche a gondola.' },
+              { icon: '🚚', title: 'Entrega Programada', desc: 'Produção própria em Anápolis-GO. Frequência que respeita o giro do seu negócio.' },
+              { icon: '💰', title: 'Margem para Revenda', desc: 'Preço justo que permite ao supermercadista e ao restaurante terem lucro sem perder competitividade.' },
             ].map((item, i) => (
-              <div key={i} className="feature-card">
-                <div className="feature-card-icon">{item.icon}</div>
+              <motion.div className="card" key={i}
+                variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-30px' }} custom={i}
+              >
+                <div className="card-icon">{item.icon}</div>
                 <h4>{item.title}</h4>
                 <p>{item.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Produtos */}
-      <section className="product-section" id="produtos">
+      {/* Who it's for */}
+      <section className="section-alt" id="para-quem">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <span className="section-label" style={{ color: '#ef4444' }}>Cardápio</span>
-            <h2 className="section-title" style={{ color: '#f7f8f8' }}>
-              6 Linhas, Um Padrão
-            </h2>
-            <p className="section-sub" style={{ margin: '0 auto' }}>
-              Toscana, Calabresa, Frango, Mista, com Queijo, Apimentada — 
-              cada uma com seu perfil, todas com o mesmo padrão de qualidade.
-            </p>
-          </div>
-          <div className="grid-3">
-            {products.map((p, i) => (
-              <div key={i} className="feature-card" style={{
-                padding: '1.5rem',
-                borderLeft: '3px solid #ef4444',
-              }}>
-                <h4 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.35rem', letterSpacing: '0.03em', marginBottom: '0.5rem' }}>
-                  {p.name}
-                </h4>
-                <p style={{ color: '#8a8f98', fontSize: '0.875rem', lineHeight: 1.6, marginBottom: '0.5rem' }}>
-                  {p.desc}
-                </p>
-                <span style={{ color: '#ef4444', fontSize: '0.75rem', fontWeight: 600 }}>{p.weight}</span>
-              </div>
+          <motion.div style={{ textAlign: 'center', marginBottom: '3rem' }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            <span className="section-label" style={{ color: '#f87171', borderColor: 'rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.05)' }}>Perfil</span>
+            <h2 className="section-title">Para Quem é a Linguiça Exata</h2>
+          </motion.div>
+
+          <div className="buyer-grid">
+            {[
+              {
+                icon: '🏪',
+                title: 'Supermercados e Mercearias',
+                desc: 'Produto de alto giro que fideliza o cliente. Apresentação atraente na gondola, embalagem prática, validade estendida.',
+                items: ['Margem competitiva', 'Display próprio', 'Entrega semanal', 'Degustação na abertura de conta'],
+              },
+              {
+                icon: '🍽️',
+                title: 'Restaurantes e Bares',
+                desc: 'A linguiça que não encolhe na chapa, não solta água, não decepciona o cliente final.',
+                items: ['Embalagem atacado 5kg', 'Tempero consistente lote a lote', 'Preço fechado por período', 'Cardápio exclusivo para PF'],
+              },
+              {
+                icon: '🥩',
+                title: 'Açougues',
+                desc: 'Diferencial na sua vitrine. Cliente que experimenta a Linguiça Exata vira comprador recorrente.',
+                items: ['Linha completa para balcão', 'Porção degustação grátis', 'Treinamento de ponto de venda', 'Material de gondola'],
+              },
+              {
+                icon: '🎉',
+                title: 'Churrasqueiros (Atacado)',
+                desc: 'Casamentos, confraternizações, eventos. Todo mundo pede a "linguiça vermelha".',
+                items: ['A partir de 10kg', 'Preço especial por quantidade', 'Entrega agendada', 'Sabor que vira tradição'],
+              },
+            ].map((buyer, i) => (
+              <motion.div className="buyer-card" key={i} style={{ background: 'var(--bg-card)', borderColor: i === 0 ? 'rgba(239,68,68,0.1)' : 'var(--border-subtle)' }}
+                variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-30px' }} custom={i}
+              >
+                <div className="buyer-icon">{buyer.icon}</div>
+                <h4>{buyer.title}</h4>
+                <p>{buyer.desc}</p>
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem', fontSize: '0.875rem', color: 'var(--text-tertiary)' }}>
+                  {buyer.items.map((item, j) => <li key={j} style={{ listStyle: 'none', display: 'flex', gap: '0.5rem' }}>
+                    <span style={{ color: '#ef4444' }}>✦</span>{item}
+                  </li>)}
+                </ul>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Para quem compra */}
-      <section className="product-section product-section-alt">
+      {/* Lines */}
+      <section className="section-base" id="linhas">
+        <div className="container">
+          <motion.div style={{ textAlign: 'center', marginBottom: '3rem' }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            <span className="section-label" style={{ color: '#f87171', borderColor: 'rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.05)' }}>Linhas</span>
+            <h2 className="section-title">Nossas 6 Linhas</h2>
+            <p className="section-sub" style={{ margin: '0 auto' }}>
+              Cada uma com sua personalidade. Todas com o mesmo cuidado artesanal.
+            </p>
+          </motion.div>
+
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Linha</th>
+                  <th>Descrição</th>
+                  <th>Ideal para</th>
+                  <th>Embalagem</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { name: 'Tradicional', desc: 'A receita original — suave e marcante', ideal: 'Toda ocasião', pack: '500g / 1kg / 5kg' },
+                  { name: 'Calabresa', desc: 'Pimentão e defumado natural', ideal: 'Churrasco e PF', pack: '500g / 1kg / 5kg' },
+                  { name: 'Toscana', desc: 'Alho e ervas finas', ideal: 'Massas e grelhados', pack: '500g / 1kg / 5kg' },
+                  { name: 'Apimentada', desc: 'Pimenta dedo-de-moça na medida', ideal: 'Acompanhamento e petisco', pack: '500g / 1kg' },
+                  { name: 'Defumada', desc: 'Defumação natural com lenha de eucalipto', ideal: 'Botecos e churrascarias', pack: '500g / 1kg' },
+                  { name: 'Hot Dog', desc: 'A linguiça que não estoura na água', ideal: 'Food trucks e trailers', pack: '1kg / 5kg' },
+                ].map((row, i) => (
+                  <tr key={i}>
+                    <td style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{row.name}</td>
+                    <td>{row.desc}</td>
+                    <td>{row.ideal}</td>
+                    <td>{row.pack}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className="section-alt">
         <div className="container">
           <div className="grid-2">
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(239,68,68,0.08), transparent)',
-              borderRadius: 12,
-              border: '1px solid rgba(239,68,68,0.15)',
-              padding: '2.5rem',
-            }}>
-              <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🏪</div>
-              <h4 style={{ color: '#f7f8f8', fontSize: '1.25rem', marginBottom: '0.75rem' }}>
-                Supermercados
-              </h4>
-              <p style={{ color: '#8a8f98', fontSize: '0.9375rem', lineHeight: 1.7 }}>
-                Produto com giro alto e fidelidade de cliente. A linguiça que o consumidor 
-                reconhece na gôndola e compra de novo.
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <span className="section-label" style={{ color: '#f87171', borderColor: 'rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.05)' }}>Processo</span>
+              <h2 className="section-title">Feito Como Antigamente</h2>
+              <p style={{ fontSize: '0.9375rem', lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
+                Da escolha da carne à selagem da embalagem — cada etapa é feita com o cuidado 
+                que transforma uma simples linguiça em um produto que o cliente pede pelo nome.
               </p>
-              <ul style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {['Embalagem padrão 1kg', 'Preço competitivo', 'Entrega programada'].map(t => (
-                  <li key={t} style={{ display: 'flex', gap: '0.5rem', fontSize: '0.875rem', color: '#b0b6c0' }}>
-                    <span style={{ color: '#ef4444' }}>✓</span>{t}
-                  </li>
+              <div className="process-steps">
+                {[
+                  { num: '1', title: 'Seleção da Carne', desc: 'Cortes nobres, procedência rastreada.', color: 'rgba(239,68,68,0.15)', textColor: '#ef4444' },
+                  { num: '2', title: 'Moagem e Tempero', desc: 'Receita proprietária, moagem no ponto exato.', color: 'rgba(239,68,68,0.15)', textColor: '#ef4444' },
+                  { num: '3', title: 'Embutimento Artesanal', desc: 'Tripa natural — a textura que faz diferença.', color: 'rgba(239,68,68,0.15)', textColor: '#ef4444' },
+                  { num: '4', title: 'Resfriamento e Embalagem', desc: 'Selado a vácuo, validade estendida sem conservantes.', color: 'rgba(239,68,68,0.15)', textColor: '#ef4444' },
+                ].map((step, i) => (
+                  <div className="process-step" key={i}>
+                    <div className="step-number" style={{ background: step.color, color: step.textColor }}>{step.num}</div>
+                    <div>
+                      <div className="step-title">{step.title}</div>
+                      <div className="step-desc">{step.desc}</div>
+                    </div>
+                  </div>
                 ))}
-              </ul>
-            </div>
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(239,68,68,0.08), transparent)',
-              borderRadius: 12,
-              border: '1px solid rgba(239,68,68,0.15)',
-              padding: '2.5rem',
-            }}>
-              <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🥩</div>
-              <h4 style={{ color: '#f7f8f8', fontSize: '1.25rem', marginBottom: '0.75rem' }}>
-                Restaurantes & Churrascarias
+              </div>
+            </motion.div>
+
+            <motion.div className="highlight-box" style={{ background: 'linear-gradient(135deg, rgba(239,68,68,0.06), rgba(239,68,68,0.02))', borderColor: 'rgba(239,68,68,0.12)' }}
+              initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+                🎁 Degustação Grátis
               </h4>
-              <p style={{ color: '#8a8f98', fontSize: '0.9375rem', lineHeight: 1.7 }}>
-                A calabresa defumada que dá diferença no prato. Fornecedor que não falta 
-                e não varia qualidade.
+              <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: '1.25rem', lineHeight: 1.7 }}>
+                Cliente novo? A gente leva uma amostra para você provar antes de comprar. 
+                Sem compromisso, sem pressão — só o sabor falando por si.
               </p>
-              <ul style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {['Embalagem food service', 'Entrega em Anápolis e região', 'Degustação gratuita'].map(t => (
-                  <li key={t} style={{ display: 'flex', gap: '0.5rem', fontSize: '0.875rem', color: '#b0b6c0' }}>
-                    <span style={{ color: '#ef4444' }}>✓</span>{t}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <a href="https://wa.me/556199542377?text=Ol%C3%A1!%20Quero%20agendar%20uma%20degusta%C3%A7%C3%A3o%20da%20Lingui%C3%A7a%20Exata" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: '#ef4444', color: '#fff' }}>
+                  🥩 Quero Degustar
+                </a>
+              </div>
+              <p style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginTop: '1rem' }}>
+                Disponível para supermercados, restaurantes e açougues em Anápolis e região.
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="product-section" style={{ textAlign: 'center' }}>
+      {/* CTA */}
+      <section className="cta-section" id="contato" style={{ paddingBottom: '3rem' }}>
         <div className="container">
-          <h2 className="section-title" style={{
-            color: '#f7f8f8',
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-            letterSpacing: '0.03em',
-            marginBottom: '0.75rem',
-          }}>
-            QUER EXPERIMENTAR?
-          </h2>
-          <p className="section-sub" style={{ margin: '0 auto 2rem' }}>
-            Degustação grátis para estabelecimentos comerciais em Anápolis e região. 
-            Chama no WhatsApp que a gente leva.
-          </p>
-          <a href="https://wa.me/5561936180578?text=Ol%C3%A1%20Marcos!%20Quero%20comprar%20Lingui%C3%A7a%20Exata%20para%20meu%20neg%C3%B3cio" target="_blank" rel="noopener noreferrer" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            padding: '1rem 2.5rem', borderRadius: 0,
-            background: '#22c55e',
-            color: '#fff', fontSize: '1.05rem', fontWeight: 600,
-            textDecoration: 'none', textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-          }}>
-            📱 Chama no WhatsApp
-          </a>
-          <div style={{ marginTop: '1rem' }}>
-            <Link to="/" className="back-link">← Voltar ao portfólio</Link>
-          </div>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+            <h2>Quer Linguiça Exata no Seu Negócio?</h2>
+            <p>Encomende agora. Tabela de preços, degustação e primeira entrega — resolvemos tudo no WhatsApp.</p>
+            <div className="btn-row">
+              <a href="https://wa.me/556199542377?text=Ol%C3%A1!%20Quero%20comprar%20Lingui%C3%A7a%20Exata%20para%20meu%20neg%C3%B3cio" target="_blank" rel="noopener noreferrer" className="btn btn-lg" style={{ background: '#ef4444', color: '#fff' }}>
+                🥩 Quero Revender
+              </a>
+              <Link to="/" className="btn btn-ghost btn-lg">
+                ← Voltar ao Início
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <p>Linguiça Exata — Artesanal Premium · Anápolis-GO · Desde 2000</p>
+          <p>© 2026 Linguiça Exata — Artesanal desde 2000</p>
+          <p style={{ marginTop: '0.375rem', fontSize: '0.8125rem', color: 'var(--text-tertiary)' }}>
+            Anápolis-GO · Produção Própria · WhatsApp: (61) 99542-377
+          </p>
         </div>
       </footer>
     </div>
