@@ -7,7 +7,7 @@ const products = [
     id: 'pimel',
     name: 'PIMEL',
     tag: 'Mel com Certificação SISBI',
-    description: 'Do Cerrado para todo o Brasil. Certificação SISBI — venda em qualquer estado. 8 linhas de produto, 8 redes nacionais já atendidas.',
+    description: 'Mel esporádico (safral). Entreposto em DF elimina 180km/dia de deslocamento. Comissão 5%, prazo à vista / 7d (redes 14-30d). Catálogo digital enviado antes da prospecção.',
     icon: '🍯',
     accent: '#f59e0b',
     color: 'linear-gradient(135deg, #f59e0b, #d97706)',
@@ -21,7 +21,7 @@ const products = [
     id: 'linguica',
     name: 'Linguiça Exata',
     tag: 'Artesanal Premium desde 2000',
-    description: '25 anos de tradição em Anápolis-GO. Linguiça feita como antigamente — sabor que fideliza cliente. Supermercados, restaurantes e muito mais.',
+    description: 'Foco total no DF. Entrega toda sexta (pedidos seg–qua). Comissão 10%, prazo à vista / 7d / 14d. Meta curto prazo: 300kg/semana; médio: 2000kg/semana.',
     icon: '🥩',
     accent: '#ef4444',
     color: 'linear-gradient(135deg, #ef4444, #b91c1c)',
@@ -35,7 +35,7 @@ const products = [
     id: 'condel',
     name: 'Condel Condutores',
     tag: 'Distribuição com Preço Justo',
-    description: 'Depósito próprio em Taguatinga-DF. 150+ lojas atendidas. Castelo Forte, Casa Forte e as principais marcas, sempre em estoque.',
+    description: 'Agendamento em construtoras como canal prioritário. Pagamento exclusivamente à vista (Pix). Varredura por avenida inclui material de construção. Comissão 10%. Meta: R$25k/mês (curto) → R$60k/mês (médio).',
     icon: '⚡',
     accent: '#3b82f6',
     color: 'linear-gradient(135deg, #3b82f6, #2563eb)',
@@ -239,7 +239,8 @@ export default function Hub() {
             <h2 className="section-title">Marcos Domingos</h2>
             <p className="section-sub" style={{ margin: '0 auto', maxWidth: '640px' }}>
               Mais de 20 anos conectando produtores de excelência ao mercado varejista 
-              do Centro-Oeste — e agora de todo Brasil.
+              do Distrito Federal. Foco em Samambaia, Taguatinga, Ceilândia, Vicente Pires, 
+              Águas Claras, Riacho Fundo I/II, Recanto das Emas, Guará e Cidade Estrutural.
             </p>
           </motion.div>
 
@@ -252,12 +253,13 @@ export default function Hub() {
             >
               <p style={{ fontSize: '1.05rem', lineHeight: 1.8, color: 'var(--text-secondary)', marginBottom: '1rem' }}>
                 Três operações complementares — alimentos e materiais elétricos — com uma filosofia: 
-                levar o melhor custo-benefício para cada cliente. Do pequeno comércio à grande rede nacional.
+                levar o melhor custo-benefício para cada cliente. Estratégia de prospecção por varredura de avenida 
+                (farmácia, mercado, material de construção, açougue) + leads WhatsApp.
               </p>
               <p style={{ fontSize: '0.9375rem', lineHeight: 1.7, color: 'var(--text-tertiary)' }}>
-                Presença consolidada no Distrito Federal e Goiás, com expansão nacional via PIMEL 
-                e certificação SISBI. Cada operação tem seu plano de crescimento, 
-                mas todas compartilham o mesmo DNA de qualidade e confiança.
+                Presença consolidada no Distrito Federal. Cada operação tem seu plano de crescimento, 
+                mas todas compartilham o mesmo DNA de qualidade e confiança. 
+                Clientes atuais: Dia a Dia, Costa Atacado, Super Adega, Itatico, Castelo Forte, Casa Forte, Rei do Pão, Delícia Mineira e Pão e Flocos.
               </p>
               <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                 <a

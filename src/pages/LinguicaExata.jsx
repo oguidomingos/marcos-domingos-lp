@@ -63,7 +63,7 @@ export default function LinguicaExata() {
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22, duration: 0.5 }}>
             25 anos fazendo linguiça como antigamente — receita artesanal, carne selecionada, 
-            <span style={{ color: 'var(--text-primary)' }}> o sabor que faz o cliente voltar.</span>
+            <span style={{ color: 'var(--text-primary)' }}> foco total no DF. Entrega toda sexta (pedidos seg–qua).</span>
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32, duration: 0.5 }}
@@ -83,9 +83,10 @@ export default function LinguicaExata() {
       <motion.div className="stats-strip" style={{ borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
       >
-        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#ef4444' }}>25</div><div className="stat-label">Anos de Tradição</div></div>
-        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#ef4444' }}>6</div><div className="stat-label">Linhas de Linguiça</div></div>
-        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#ef4444' }}>Anápolis</div><div className="stat-label">GO — Produção Própria</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#ef4444' }}>300kg</div><div className="stat-label">Meta Curto Prazo /sem</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#ef4444' }}>2t</div><div className="stat-label">Meta Médio Prazo /sem</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#ef4444' }}>10%</div><div className="stat-label">Comissão</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#ef4444' }}>DF</div><div className="stat-label">Foco Total</div></div>
       </motion.div>
 
       {/* Differences */}
@@ -103,12 +104,12 @@ export default function LinguicaExata() {
 
           <div className="grid-3">
             {[
-              { icon: '🧑‍🍳', title: '25 Anos de Estrada', desc: 'Uma receita que foi aperfeiçoada por duas gerações. O paladar do Centro-Oeste conhece e aprova.' },
+              { icon: '🗺️', title: 'Foco Total no DF', desc: 'Samambaia, Taguatinga, Ceilândia, Vicente Pires, Águas Claras, Riacho Fundo I/II, Recanto das Emas, Guará e Cidade Estrutural.' },
               { icon: '🥩', title: 'Carne Selecionada', desc: 'Cortes nobres, sem excesso de gordura. A rendibilidade na chapa é visível.' },
               { icon: '🧂', title: 'Tempero Proprietário', desc: 'A receita secreta que faz cada mordida ter exatamente o ponto certo de sal e especiarias.' },
               { icon: '📦', title: '6 Linhas de Produto', desc: 'De tradicional à apimentada, de calabresa à toscana — variedade que enche a gondola.' },
-              { icon: '🚚', title: 'Entrega Programada', desc: 'Produção própria em Anápolis-GO. Frequência que respeita o giro do seu negócio.' },
-              { icon: '💰', title: 'Margem para Revenda', desc: 'Preço justo que permite ao supermercadista e ao restaurante terem lucro sem perder competitividade.' },
+              { icon: '🚚', title: 'Entrega Toda Sexta', desc: 'Pedidos de segunda a quarta. Produção própria com frequência que respeita o giro do seu negócio.' },
+              { icon: '💎', title: 'Margem para Revenda', desc: 'Preço justo que permite ao supermercadista e ao restaurante terem lucro sem perder competitividade.' },
             ].map((item, i) => (
               <motion.div className="card" key={i}
                 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-30px' }} custom={i}
@@ -172,6 +173,59 @@ export default function LinguicaExata() {
                 </ul>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Operação */}
+      <section className="section-base" id="operacao">
+        <div className="container">
+          <motion.div style={{ textAlign: 'center', marginBottom: '3rem' }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            <span className="section-label" style={{ color: '#f87171', borderColor: 'rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.05)' }}>Operação</span>
+            <h2 className="section-title">Como Trabalhamos no DF</h2>
+          </motion.div>
+
+          <div className="grid-2">
+            <motion.div className="highlight-box" style={{ background: 'linear-gradient(135deg, rgba(239,68,68,0.06), rgba(239,68,68,0.02))', borderColor: 'rgba(239,68,68,0.12)' }}
+              initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+            >
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+                📊 Dados da Operação
+              </h4>
+              <ul className="checklist">
+                {[
+                  'Comissão: 10%',
+                  'Prazo: à vista / 7 dias / 14 dias',
+                  'Entrega: toda sexta (pedidos seg–qua)',
+                  'Meta curto prazo: 300kg/semana',
+                  'Meta médio prazo: 2.000kg/semana',
+                ].map((item, i) => (
+                  <li key={i}>
+                    <span className="check-icon" style={{ background: 'rgba(239,68,68,0.15)', color: '#ef4444' }}>✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            <motion.div className="highlight-box" style={{ background: 'linear-gradient(135deg, rgba(239,68,68,0.06), rgba(239,68,68,0.02))', borderColor: 'rgba(239,68,68,0.12)' }}
+              initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+                📍 Área Prioritária DF
+              </h4>
+              <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: 1.7 }}>
+                Samambaia, Taguatinga, Ceilândia, Vicente Pires, Águas Claras, Riacho Fundo I/II, Recanto das Emas, Guará e Cidade Estrutural.
+              </p>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem', marginTop: '1rem' }}>
+                🏢 Clientes Atuais
+              </h4>
+              <p style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', lineHeight: 1.6 }}>
+                Dia a Dia, Costa Atacado, Super Adega, Itatico, Castelo Forte, Casa Forte, Rei do Pão, Delícia Mineira, Pão e Flocos.
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -296,7 +350,7 @@ export default function LinguicaExata() {
         <div className="container">
           <p>© 2026 Linguiça Exata — Artesanal desde 2000</p>
           <p style={{ marginTop: '0.375rem', fontSize: '0.8125rem', color: 'var(--text-tertiary)' }}>
-            Anápolis-GO · Produção Própria · WhatsApp: (61) 99542-377
+            Foco DF · Entrega toda sexta · WhatsApp: (61) 99542-377
           </p>
         </div>
       </footer>

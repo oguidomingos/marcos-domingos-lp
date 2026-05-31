@@ -60,8 +60,8 @@ export default function Pimel() {
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22, duration: 0.5 }}>
-            Puro, certificado e aprovado pelo SISBI — o mel que vende em todo o Brasil. 
-            <span style={{ color: 'var(--text-primary)' }}> 8 linhas, 8 redes nacionais, 0 burocracia.</span>
+            Mel esporádico (safral). Entreposto em DF elimina 180km/dia de deslocamento. 
+            <span style={{ color: 'var(--text-primary)' }}> Comissão 5%, prazo à vista / 7d (redes 14-30d). Catálogo digital enviado antes da prospecção.</span>
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32, duration: 0.5 }}
@@ -81,9 +81,9 @@ export default function Pimel() {
       <motion.div className="stats-strip" style={{ borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
       >
-        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#f59e0b' }}>8</div><div className="stat-label">Linhas de Mel</div></div>
-        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#f59e0b' }}>8</div><div className="stat-label">Redes Nacionais</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#f59e0b' }}>5%</div><div className="stat-label">Comissão</div></div>
         <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#f59e0b' }}>SISBI</div><div className="stat-label">Certificação Nacional</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#f59e0b' }}>DF</div><div className="stat-label">Entreposto Local</div></div>
       </motion.div>
 
       {/* Products section */}
@@ -180,6 +180,65 @@ export default function Pimel() {
                   </li>
                 ))}
               </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Operação */}
+      <section className="section-base" id="operacao">
+        <div className="container">
+          <motion.div style={{ textAlign: 'center', marginBottom: '3rem' }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            <span className="section-label" style={{ color: '#fbbf24', borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.05)' }}>Operação</span>
+            <h2 className="section-title">Como Trabalhamos no DF</h2>
+          </motion.div>
+
+          <div className="grid-2">
+            <motion.div className="highlight-box" style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.06), rgba(245,158,11,0.02))', borderColor: 'rgba(245,158,11,0.15)' }}
+              initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+            >
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+                📊 Dados da Operação
+              </h4>
+              <ul className="checklist">
+                {[
+                  'Mel esporádico (safral)',
+                  'Comissão: 5%',
+                  'Prazo: à vista / 7 dias (redes 14-30 dias)',
+                  'Entreposto em DF elimina 180km/dia de deslocamento',
+                  'Catálogo digital enviado antes da prospecção',
+                ].map((item, i) => (
+                  <li key={i}>
+                    <span className="check-icon" style={{ background: 'rgba(245,158,11,0.15)', color: '#f59e0b' }}>✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            <motion.div className="highlight-box" style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.06), rgba(245,158,11,0.02))', borderColor: 'rgba(245,158,11,0.15)' }}
+              initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+                📍 Área Prioritária DF
+              </h4>
+              <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: 1.7 }}>
+                Samambaia, Taguatinga, Ceilândia, Vicente Pires, Águas Claras, Riacho Fundo I/II, Recanto das Emas, Guará e Cidade Estrutural.
+              </p>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem', marginTop: '1rem' }}>
+                🏢 Clientes Atuais
+              </h4>
+              <p style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', lineHeight: 1.6 }}>
+                Dia a Dia, Costa Atacado, Super Adega, Itatico, Castelo Forte, Casa Forte, Rei do Pão, Delícia Mineira, Pão e Flocos.
+              </p>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem', marginTop: '1rem' }}>
+                🔍 Estratégia de Prospecção
+              </h4>
+              <p style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', lineHeight: 1.6 }}>
+                Varredura por avenida: farmácia, mercado, material de construção, açougue + leads WhatsApp.
+              </p>
             </motion.div>
           </div>
         </div>

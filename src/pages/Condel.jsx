@@ -60,8 +60,8 @@ export default function Condel() {
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22, duration: 0.5 }}>
-            Depósito próprio em Taguatinga-DF — saída imediata, preço que ganha da concorrência. 
-            <span style={{ color: 'var(--text-primary)' }}> 150+ lojas atendidas.</span>
+            Agendamento em construtoras como canal prioritário. Pagamento exclusivamente à vista (Pix). 
+            <span style={{ color: 'var(--text-primary)' }}> Comissão 10%. Meta: R$25k/mês (curto) → R$60k/mês (médio).</span>
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32, duration: 0.5 }}
@@ -81,9 +81,10 @@ export default function Condel() {
       <motion.div className="stats-strip" style={{ borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
       >
-        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#3b82f6' }}>150+</div><div className="stat-label">Lojas Atendidas</div></div>
-        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#3b82f6' }}>15+</div><div className="stat-label">Marcas Premium</div></div>
-        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#3b82f6' }}>5.000+</div><div className="stat-label">Itens em Estoque</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#3b82f6' }}>10%</div><div className="stat-label">Comissão</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#3b82f6' }}>R$25k</div><div className="stat-label">Meta Curto /mês</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#3b82f6' }}>R$60k</div><div className="stat-label">Meta Médio /mês</div></div>
+        <div className="stat-item"><div className="stat-value" style={{ fontFamily: "'Fraunces', serif", color: '#3b82f6' }}>Pix</div><div className="stat-label">Pagamento À Vista</div></div>
       </motion.div>
 
       {/* Why Condel */}
@@ -98,11 +99,11 @@ export default function Condel() {
 
           <div className="grid-3">
             {[
-              { icon: '🏭', title: 'Depósito Próprio', desc: 'Estoque permanente em Taguatinga-DF. Seu pedido sai sem depender de terceiros.' },
-              { icon: '🚚', title: 'Entrega Rápida', desc: 'Cobertura total do DF e entorno. Programação semanal para Goiás.' },
-              { icon: '💰', title: 'Preço Justo', desc: 'Margem para você revender com lucro. Sem taxa de canal, sem atravessador.' },
-              { icon: '📊', title: 'Linha Completa', desc: 'Condutores, quadros, disjuntores, tomadas, fios e cabos — uma só nota.' },
-              { icon: '✓', title: 'Produto Certificado', desc: 'INMETRO, ABINEE, normas NBR. Qualidade que passa na fiscalização.' },
+              { icon: '🏗️', title: 'Construtoras — Canal Prioritário', desc: 'Agendamento direto em construtoras. Orçamento rápido, entrega programada e pagamento à vista (Pix).' },
+              { icon: '🚚', title: 'Varredura por Avenida', desc: 'Estratégia ativa: farmácia, mercado, material de construção e açougue. Leads capturados também via WhatsApp.' },
+              { icon: '💸', title: 'Pagamento À Vista (Pix)', desc: 'Sem risco de inadimplência. Fluxo de caixa previsível para você e para o distribuidor.' },
+              { icon: '📊', title: 'Metas Claras', desc: 'Curto prazo: R$25k/mês. Médio prazo: R$60k/mês. Comissão de 10% sobre vendas fechadas.' },
+              { icon: '✅', title: 'Produto Certificado', desc: 'INMETRO, ABINEE, normas NBR. Qualidade que passa na fiscalização.' },
               { icon: '🤝', title: 'Parceria de Longo Prazo', desc: 'Mais de 150 lojas confiam. Condições especiais para cliente fidelizado.' },
             ].map((item, i) => (
               <motion.div className="card" key={i}
@@ -138,6 +139,54 @@ export default function Condel() {
           >
             E muitas outras. Se tem na construção civil, <strong style={{ color: 'var(--text-primary)' }}>a Condel tem no depósito.</strong>
           </motion.p>
+        </div>
+      </section>
+
+      {/* Operação */}
+      <section className="section-alt" id="operacao">
+        <div className="container">
+          <motion.div style={{ textAlign: 'center', marginBottom: '3rem' }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          >
+            <span className="section-label" style={{ color: '#60a5fa', borderColor: 'rgba(59,130,246,0.2)', background: 'rgba(59,130,246,0.05)' }}>Operação</span>
+            <h2 className="section-title">Área de Atuação e Clientes</h2>
+          </motion.div>
+
+          <div className="grid-2">
+            <motion.div className="highlight-box" style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.06), rgba(59,130,246,0.02))', borderColor: 'rgba(59,130,246,0.12)' }}
+              initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+            >
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+                📍 Área Prioritária DF
+              </h4>
+              <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: 1.7 }}>
+                Samambaia, Taguatinga, Ceilândia, Vicente Pires, Águas Claras, Riacho Fundo I/II, Recanto das Emas, Guará e Cidade Estrutural.
+              </p>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem', marginTop: '1rem' }}>
+                🔍 Estratégia de Prospecção
+              </h4>
+              <p style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', lineHeight: 1.6 }}>
+                Varredura por avenida: farmácia, mercado, material de construção, açougue + leads WhatsApp.
+              </p>
+            </motion.div>
+
+            <motion.div className="highlight-box" style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.06), rgba(59,130,246,0.02))', borderColor: 'rgba(59,130,246,0.12)' }}
+              initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+                🏢 Clientes Atuais
+              </h4>
+              <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: 1.7 }}>
+                Dia a Dia, Costa Atacado, Super Adega, Itatico, Castelo Forte, Casa Forte, Rei do Pão, Delícia Mineira, Pão e Flocos.
+              </p>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem', marginTop: '1rem' }}>
+                📈 Dados da Operação
+              </h4>
+              <p style={{ fontSize: '0.875rem', color: 'var(--text-tertiary)', lineHeight: 1.6 }}>
+                Comissão: 10%. Prazo: à vista (Pix). Meta curto prazo: R$25k/mês. Meta médio prazo: R$60k/mês.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
